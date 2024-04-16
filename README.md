@@ -1,7 +1,7 @@
 <div align="center">
   <a href="https://api.sylvain.pro"><img src="https://github.com/20syldev/api/blob/main/src/api.png" alt="Logo" width="25%" height="auto"></a>
 
-# Coop - API Publique
+# API Publique - Sylvain
   [![Badge1](https://img.shields.io/badge/Version%20:-v1.0.0-ee6464?labelColor=23272A)](https://api.sylvain.pro)
   [![Badge2](https://img.shields.io/badge/Statut%20:-En%20ligne-42b85f?labelColor=23272A)](https://api.sylvain.pro)
 </div>
