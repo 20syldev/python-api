@@ -15,8 +15,10 @@ def serve_static(filename):
 @app.route('/password', methods=['GET'])
 def generate_password():
     token = request.args.get('len', '')
+    if not token.isdigit():
+        token = '24'
     characters = string.ascii_letters + string.digits
-    password = ''.join(random.choice(characters) for _ in range(token))
+    password = ''.join(random.choice(characters) for _ in range(int(token)))
     
     return {'key': password}
 
