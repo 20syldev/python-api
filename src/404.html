@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sylvain L. - API</title>
+    <meta content="text/html" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mobile.css') }}" media="handheld, only screen and (max-device-width: 1080px)"/>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='api.png') }}"/>
+  </head>
+  <body>
+    <span id="title">Erreur</span>
+    <br><br>
+    <pre>
+        GET /password failed
+        Impossible de trouver <span id="url"></span>
+
+        Soit le sous-domaine est mal écrit <span id="link"></span>, ou l'argument donné <span id="arg"></span>est vide ou invalide.
+    </pre>
+
+    <script>
+      document.getElementById('url').innerText = document.location.pathname + document.location.search;
+      
+      if (document.location.pathname) {
+        document.getElementById('link').innerText = '( ' + document.location.pathname + ' )';
+      }
+      
+      if (document.location.search) {
+        document.getElementById('arg').innerText = '( ' + document.location.search + ' ) ';
+      }
+    </script>
+  </body>
+</html>
