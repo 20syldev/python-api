@@ -79,13 +79,24 @@ def generate_username():
 
 @app.route('/personal', methods=['GET'])
 def generate_personal():
-    noms = ['John Doe', 'Jane Smith', 'Michael Johnson', 'Emily Davis']
-    emails = ['john@example.com', 'jane@example.com', 'michael@example.com', 'emily@example.com']
-    tel = ['123-456-7890', '01 23 45 67 89', '04 71 123 4567', '163 555 1584', '02-123-456-789']
-    pays = ['FR', 'US', 'RU', 'UK', 'DE', 'IT', 'ES']
+    noms = ['John Doe', 'Jane Martin', 'Michael Johnson', 'Emily Davis', 'Alexis Barbos']
+    emails = ['john@example.com', 'jane@example.com', 'michael@example.com', 'emily@example.com', 'alexis@example.com']
+    tel = ['123-456-7890', '06 78 90 12 34', '7911 123456', '678 901 234', '163 555 1584']
+    pays = ['US', 'FR', 'UK', 'ES', 'DE']
     job = ['Writer', 'Artist', 'Musician', 'Explorer', 'Scientist', 'Engineer', 'Athlete', 'Doctor', 'Teacher', 'Lawyer', 'Entrepreneur', 'Actor', 'Dancer', 'Photographer', 'Architect', 'Pilot', 'Designer', 'Journalist', 'Veterinarian']
+    card = ' '.join([str(random.randint(1000, 9999)) for _ in range(4)])
+    cvc = random.randint(100, 999)
+    expiration_year = str(random.randint(datetime.now().year, datetime.now().year + 3))[-2:]
+    expiration_month = random.randint(1, 12)
     
-    return jsonify({'nom': random.choice(noms), 'email': random.choice(emails), 'tel': random.choice(tel), 'pays': random.choice(pays), 'profession': random.choice(job)})
+    i = random.randint(0, len(noms) - 1)
+    
+    if expiration_month < 10:
+        expiration_date = f"0{expiration_month}/{expiration_year}"
+    else:
+        expiration_date = f"{expiration_month}/{expiration_year}"
+        
+    return jsonify({'nom': noms[i], 'email': emails[i], 'tel': tel[i], 'pays': pays[i], 'profession': random.choice(job), 'card_numbers': card, 'cvc': cvc, 'expiration': expiration_date})
 
 @app.errorhandler(404)
 def page_not_found(e):
