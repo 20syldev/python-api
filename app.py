@@ -43,6 +43,13 @@ def generate_qrcode():
 
     return send_file(img_bytes, mimetype='image/png')
 
+@app.route('/domain', methods=['GET'])
+def generate_domain():
+    noms = ['example', 'site', 'test', 'demo']
+    extensions = ['.com', '.fr', '.eu', '.dev', '.net', '.org', '.io']
+    domain = random.choice(noms) + random.choice(extensions)
+    return jsonify({'domain': domain, 'random_name': random.choice(noms), 'random_tld': random.choice(extensions)})
+
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({'erreur': 'Veuillez fournir un endpoint valide'})
