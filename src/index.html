@@ -18,7 +18,7 @@
     <br><br>
     <pre id="infoTxt" style="color: #dddddd; transform: translateX(-100%); display: none;">
       <span style="color: #ce70d3;">import</span> requests
-      <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"key"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
+      <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"clé"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
     </pre>
     <pre>
         <b><span style="color: #f1ce8c;">GET /domain</span></b>
@@ -49,6 +49,18 @@
 
         Clé :
             - "key" : affiche la clé générée.
+
+
+
+        <b><span style="color: #f1ce8c;">GET /username</span></b>
+        <i>Renvoie une liste d'adjectifs, d'animaux, de professions, un nombre aléatoire et un pseudo aléatoire.</i>
+
+        Clés :
+            - "adjectif" : affiche la liste d'adjectifs disponibles.
+            - "animal" : affiche la liste d'animaux disponibles.
+            - "nombre" : affiche un nombre aléatoire situé entre 0 et 99.
+            - "profession" : affiche la liste des professions disponibles.
+            - "username" : affiche un nom d'utilisateur généré à l'aide des autres clés.
     </pre>
 
     <script>
