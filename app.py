@@ -50,6 +50,33 @@ def generate_domain():
     domain = random.choice(noms) + random.choice(extensions)
     return jsonify({'domain': domain, 'random_name': random.choice(noms), 'random_tld': random.choice(extensions)})
 
+@app.route('/username', methods=['GET'])
+def generate_username():
+    adj = ['Happy', 'Silly', 'Clever', 'Creative', 'Brave', 'Gentle', 'Kind', 'Funny', 'Wise', 'Charming', 'Sincere', 'Resourceful', 'Patient', 'Energetic', 'Adventurous', 'Ambitious', 'Courageous', 'Courteous', 'Determined']
+    ani = ['Cat', 'Dog', 'Tiger', 'Elephant', 'Monkey', 'Penguin', 'Dolphin', 'Lion', 'Bear', 'Fox', 'Owl', 'Giraffe', 'Zebra', 'Koala', 'Rabbit', 'Squirrel', 'Panda', 'Horse', 'Wolf', 'Eagle']
+    pro = ['Writer', 'Artist', 'Musician', 'Explorer', 'Scientist', 'Engineer', 'Athlete', 'Chef', 'Doctor', 'Teacher', 'Lawyer', 'Entrepreneur', 'Actor', 'Dancer', 'Photographer', 'Architect', 'Pilot', 'Designer', 'Journalist', 'Veterinarian']
+    
+    choix = random.choice(['adj_num', 'ani_num',  'pro_num',  'adj_ani',  'adj_ani_num', 'adj_pro', 'pro_ani', 'pro_ani_num'])
+    nombre = str(random.randint(0, 99))
+    if choix == 'adj_num':
+        username = random.choice(adj) + nombre
+    elif choix == 'ani_num':
+        username = random.choice(ani) + nombre
+    elif choix == 'pro_num':
+        username = random.choice(pro) + nombre
+    elif choix == 'adj_ani':
+        username = random.choice(adj) + random.choice(ani)
+    elif choix == 'adj_ani_num':
+        username = random.choice(adj) + random.choice(ani) + nombre
+    elif choix == 'adj_pro':
+        username = random.choice(adj) + random.choice(pro)
+    elif choix == 'pro_ani':
+        username = random.choice(pro) + random.choice(ani)
+    elif choix == 'pro_ani_num':
+        username = random.choice(pro) + random.choice(ani) + nombre
+    
+    return jsonify({'username': username, 'adjectif': adj, 'animal': ani, 'profession': pro, 'nombre': nombre})
+
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({'erreur': 'Veuillez fournir un endpoint valide'})
