@@ -101,7 +101,18 @@ def generate_personal():
 @app.route('/color', methods=['GET'])
 def generate_color():
     return jsonify({'hex': '#{0:02x}{1:02x}{2:02x}'.format(r, g, b), 'rgb': f'rgb({r}, {g}, {b})'})
-    
+
+@app.route('/lorem', methods=['GET'])
+def generate_random_text():
+    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras viverra, dui non cursus accumsan, lectus leo euismod augue, a gravida odio sapien quis elit. Vivamus vehicula nisi vitae lacinia elementum. Ut id velit quis velit feugiat elementum. Vivamus vulputate, nisl ac placerat laoreet, ex nisl suscipit ligula, volutpat dapibus elit neque non orci. Pellentesque quis lacus efficitur, egestas nisl vitae, tincidunt justo. In gravida enim et egestas dapibus. Cras tempus libero ut sapien efficitur egestas. Sed commodo volutpat suscipit. Proin vulputate ante nec lacus consequat ullamcorper. Pellentesque facilisis massa quam, in auctor neque imperdiet sit amet. Maecenas sagittis aliquam eleifend. Sed dapibus, urna ut molestie fringilla, orci lorem aliquet lacus, nec interdum tortor lacus eu mauris. Curabitur vitae faucibus mi. Duis eget tempus justo. Curabitur placerat nisl eu sem dictum, eget placerat lectus vehicula. Fusce sit amet ipsum in libero aliquam mattis sit amet quis mi. Suspendisse sollicitudin consequat diam sit amet luctus. Nunc dapibus dolor vel sagittis faucibus. Donec et lorem ante. Praesent bibendum ultricies dui, at posuere leo vulputate eu. Integer gravida ex vitae erat accumsan egestas. Sed id tellus nec felis volutpat congue. Ut eget suscipit tellus, et tempus massa. Aliquam id semper diam, feugiat congue arcu. Nunc pulvinar et nisi eu elementum. Morbi condimentum sapien at sapien gravida, vitae lacinia orci condimentum. Suspendisse scelerisque urna quis euismod mattis. Pellentesque pulvinar pretium massa at varius. In pulvinar, velit ac mattis scelerisque, mauris nibh aliquam ipsum, sed aliquam tellus erat quis lectus. Nunc semper enim a felis ultrices convallis. Etiam velit magna, porta nec dui sit amet, venenatis gravida ipsum. In vitae magna et orci consequat cursus id vitae ex. Nulla pharetra massa vel felis malesuada porttitor. Etiam convallis tellus a sodales ullamcorper. Sed hendrerit sollicitudin erat, sit amet sodales magna dignissim nec. Curabitur ut enim eget dolor tincidunt bibendum. Fusce fermentum quam et finibus laoreet. Aliquam vel sem vitae turpis sollicitudin tempus. Nam rutrum risus ultricies quam tempor mattis. Pellentesque at dui felis. Cras maximus malesuada metus vitae iaculis. Aliquam erat volutpat. Nunc facilisis pretium tellus, ut tincidunt lectus eleifend a. In vel lacinia est. Integer tristique non metus pulvinar vestibulum. Fusce sit amet velit vel libero viverra semper et vel sem. In justo libero, semper a mi varius, aliquet commodo eros. Pellentesque porttitor tellus sit amet est varius luctus. Mauris placerat porta eros. Aliquam et mi id justo auctor semper ac vitae tellus. Donec auctor porttitor enim, at ornare ante ornare vel. Pellentesque sagittis ligula vitae libero vestibulum eleifend. Duis sit amet ullamcorper leo. Integer id dui velit. Quisque posuere nulla ligula, at consectetur metus finibus quis. Vestibulum sit amet neque iaculis, malesuada ipsum eget, feugiat nibh. Donec id ultricies enim, tincidunt volutpat arcu. Etiam vitae metus in mauris semper tempus. In dapibus neque at lorem pulvinar congue. Etiam ultrices tristique leo id interdum"
+    argument = request.args.get('len', '')
+    if not argument.isdigit() or int(argument) < 1:
+        argument = 1
+
+    sentences = text.split('. ')
+    output = '. '.join(sentences[:int(argument)])
+    return jsonify({'text': output + '.'})
+
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({'erreur': 'Veuillez fournir un endpoint valide'})
