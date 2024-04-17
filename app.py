@@ -98,6 +98,10 @@ def generate_personal():
         
     return jsonify({'nom': noms[i], 'email': emails[i], 'tel': tel[i], 'pays': pays[i], 'profession': random.choice(job), 'carte': carte, 'cvc': cvc, 'expiration': date})
 
+@app.route('/color', methods=['GET'])
+def generate_color():
+    return jsonify({'hex': '#{0:02x}{1:02x}{2:02x}'.format(r, g, b), 'rgb': f'rgb({r}, {g}, {b})'})
+    
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({'erreur': 'Veuillez fournir un endpoint valide'})
