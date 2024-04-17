@@ -12,6 +12,14 @@ body {
     margin-left: 2vh;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
 #title {
     user-select: none;
     font-size: 3vh;
