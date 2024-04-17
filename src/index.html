@@ -21,22 +21,34 @@
       <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"key"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
     </pre>
     <pre>
-        GET /token?len={Nombre}
-        <i>Génère une clé (token) de la longueur que vous souhaitez.</i>
+        <b><span style="color: #f1ce8c;">GET /domain</span></b>
+        <i>Renvoie un nom de site factice, un nom de domain et un TLD aléatoire.</i>
 
-        Utilisation : 
-            - Une option vide ou invalide renverra un token de 24 caractères.
-            - {Nombre} peut prendre en compte n'importe quel nombre entre 12 et 4096.
-            - Prendre un nombre entre 12 et 48, 24 de préférence.
+        Clés :
+            - "domain" : affiche un site aléatoire.
+            - "random_name" : affiche un nom de site aléatoire.
+            - "random_tld" : affiche une extension de site aléatoire.
 
 
 
-        GET /qrcode?url={URL}
+        <b><span style="color: #f1ce8c;">GET /qrcode?url=<span style="color: #d37070;">{URL}</span></span></b>
         <i>Génère un QR code, redirigant vers un lien.</i>
 
-        Utilisation : 
+        Utilisation :
+            - <b><span style="color: #d37070;">{URL}</span></b> peut prendre en compte n'importe quel lien sur Internet.
             - Une option vide ou invalide renverra une erreur.
-            - {URL} peut prendre en compte n'importe quel lien sur Internet.
+
+
+
+        <b><span style="color: #f1ce8c;">GET /token?len=<span style="color: #79e783;">{Nombre}</span></span></b>
+        <i>Génère une clé (token) de la longueur que vous souhaitez.</i>
+
+        Utilisation :
+            - <b><span style="color: #79e783;">{Nombre}</span></b> peut prendre en compte n'importe quel nombre entre 12 et 4096.
+            - Une option vide ou invalide renverra un token de 24 caractères.
+
+        Clé :
+            - "key" : affiche la clé générée.
     </pre>
 
     <script>
