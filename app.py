@@ -1,8 +1,9 @@
-from flask import Flask, render_template, send_from_directory, request
-import random
-import string
+from flask import Flask, render_template, send_from_directory, send_file, request, jsonify
+from datetime import datetime
+from PIL import Image
+import random, string, qrcode, io
 
-app = Flask(__name__, template_folder="src", static_folder="src")
+app = Flask(__name__, template_folder='src', static_folder='src')
 
 @app.route('/')
 def index():
@@ -21,14 +22,30 @@ def generate_token():
         argument = '12'
     elif int(argument) > 4096:
         argument = '4096'
-    characters = string.ascii_letters + string.digits
-    token = ''.join(random.choice(characters) for _ in range(int(argument)))
+    token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(int(argument)))
     
-    return {'key': token}
+    return jsonify({'key': token})
+
+@app.route('/qrcode', methods=['GET'])
+def generate_qrcode():
+    url = request.args.get('url', '')
+    if not url:
+        return jsonify({'erreur': 'Veuillez fournir un argument valide (?url={URL})'})
+
+    qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=18, border=3)
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color='black', back_color='white')
+
+    img_bytes = io.BytesIO()
+    img.save(img_bytes, format='PNG')
+    img_bytes.seek(0)
+
+    return send_file(img_bytes, mimetype='image/png')
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return jsonify({'erreur': 'Veuillez fournir un endpoint valide'})
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
