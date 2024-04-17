@@ -21,6 +21,15 @@
       <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"clé"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
     </pre>
     <pre>
+        <b><span style="color: #f1ce8c;">GET /color</span></b>
+        <i>Génère une couleur aléatoire.</i>
+
+        Clés :
+            - "hex" : génère une couleur en hexadécimal.
+            - "rgb" : génère une couleur en rouge-vert-bleu.
+
+
+
         <b><span style="color: #f1ce8c;">GET /domain</span></b>
         <i>Renvoie un nom de site factice, un nom de domain et un TLD aléatoire.</i>
 
@@ -32,7 +41,7 @@
 
 
         <b><span style="color: #f1ce8c;">GET /personal</span></b>
-        <i>Renvoie une carte bancaire, un cvc, un email, une date d'expiration,
+        <i>Génère une carte bancaire, un cvc, un email, une date d'expiration,
         un nom, un pays, une profession et un numéro de téléphone factice aléatoirement.</i>
 
         Clés :
