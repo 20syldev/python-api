@@ -100,6 +100,7 @@ def generate_personal():
 
 @app.route('/color', methods=['GET'])
 def generate_color():
+    r, g, b = [random.randint(0, 255) for _ in range(3)]
     return jsonify({'hex': '#{0:02x}{1:02x}{2:02x}'.format(r, g, b), 'rgb': f'rgb({r}, {g}, {b})'})
 
 @app.route('/lorem', methods=['GET'])
