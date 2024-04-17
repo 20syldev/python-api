@@ -6,17 +6,73 @@
 body {
     background-color: #111214;
     color: #ffffff;
-    padding-top: 10px;
+    font-family: 'Raleway-Regular';
+    font-size: 2vh;
+    margin-top: 4vh;
+    overflow: hidden;
+}
+
+pre {
+    margin-left: -7vh;
 }
 
 #title {
     user-select: none;
-    font-family: 'Raleway-Regular';
-    font-size: 4vw;
-    padding: 10px;
+    font-size: 3vh;
+    margin: 2vh;
 }
 
-pre {
-    margin-left: -25px;
-    font-size: 2vw;
+.toggle {
+    position: absolute;
+    width: 2.5vh;
+    height: 2.5vh;
+    top: 4.5vh;
+    margin-left: 18vh;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.5s;
+}
+
+.bars {
+    width: 100%;
+    height: 0.5vh;
+    background-color: rgb(92, 176, 255);
+    border-radius: 6px;
+}
+#bar5 {
+    transition-duration: 0.8s;
+}
+#bar4,
+#bar6 {
+    width: 0%;
+    transition-duration: 0.2s;
+}
+
+#info {
+    display: none;
+}
+#info:checked + .toggle .bars {
+    position: absolute;
+    transition-duration: 0.5s;
+}
+#info:checked + .toggle #bar5 {
+    transform: scaleX(0);
+    transition-duration: 0.5s;
+}
+#info:checked + .toggle #bar4 {
+    width: 100%;
+    transform: rotate(45deg);
+    transition-duration: 0.5s;
+}
+#info:checked + .toggle #bar6 {
+    width: 100%;
+    transform: rotate(-45deg);
+    transition-duration: 0.5s;
+}
+#info:checked + .toggle {
+    transition-duration: 0.5s;
+    transform: rotate(180deg);
 }
