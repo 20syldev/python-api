@@ -22,11 +22,21 @@
     </pre>
     <pre>
         GET /token?len={Nombre}
+        <i>Génère une clé (token) de la longueur que vous souhaitez.</i>
 
         Utilisation : 
             - Une option vide ou invalide renverra un token de 24 caractères.
             - {Nombre} peut prendre en compte n'importe quel nombre entre 12 et 4096.
             - Prendre un nombre entre 12 et 48, 24 de préférence.
+
+
+
+        GET /qrcode?url={URL}
+        <i>Génère un QR code, redirigant vers un lien.</i>
+
+        Utilisation : 
+            - Une option vide ou invalide renverra une erreur.
+            - {URL} peut prendre en compte n'importe quel lien sur Internet.
     </pre>
 
     <script>
