@@ -77,6 +77,16 @@ def generate_username():
     
     return jsonify({'username': username, 'adjectif': adj, 'animal': ani, 'profession': pro, 'nombre': nombre})
 
+@app.route('/personal', methods=['GET'])
+def generate_personal():
+    noms = ['John Doe', 'Jane Smith', 'Michael Johnson', 'Emily Davis']
+    emails = ['john@example.com', 'jane@example.com', 'michael@example.com', 'emily@example.com']
+    tel = ['123-456-7890', '01 23 45 67 89', '04 71 123 4567', '163 555 1584', '02-123-456-789']
+    pays = ['FR', 'US', 'RU', 'UK', 'DE', 'IT', 'ES']
+    job = ['Writer', 'Artist', 'Musician', 'Explorer', 'Scientist', 'Engineer', 'Athlete', 'Doctor', 'Teacher', 'Lawyer', 'Entrepreneur', 'Actor', 'Dancer', 'Photographer', 'Architect', 'Pilot', 'Designer', 'Journalist', 'Veterinarian']
+    
+    return jsonify({'nom': random.choice(noms), 'email': random.choice(emails), 'tel': random.choice(tel), 'pays': random.choice(pays), 'profession': random.choice(job)})
+
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({'erreur': 'Veuillez fournir un endpoint valide'})
