@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <!-- Titre et Image de l'onglet / Liens vers le CSS -->
     <title>Sylvain L. - API</title>
     <meta content="text/html" charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
@@ -8,6 +9,7 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='api.png') }}"/>
   </head>
   <body>
+    <!-- Titre / Bouton -->
     <span id="title">Endpoints</span>
     <input id="info" type="checkbox">
     <label class="toggle" for="info">
@@ -16,10 +18,12 @@
       <div id="bar6" class="bars"></div>
     </label>
     <br><br>
+    <!-- Blocs de texte d'informations -->
     <pre id="infoTxt" style="color: #dddddd; transform: translateX(-100%); display: none;">
       <span style="color: #ce70d3;">import</span> requests
       <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"clé"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
     </pre>
+    <!-- Affichage de tous les endpoints -->
     <pre>
         <b><span style="color: #f1ce8c;">GET <a href="/color">/color</a></span></b>
         <i>Génère une couleur aléatoire.</i>
@@ -101,6 +105,7 @@
     </pre>
 
     <script>
+      // Animation quand le bouton est cliqué
       document.getElementById("info").addEventListener("click", function() {
         var info = document.getElementById("infoTxt");
         if (info.style.display == 'none') {
