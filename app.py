@@ -12,15 +12,19 @@ def index():
 def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
 
-@app.route('/password', methods=['GET'])
-def generate_password():
-    token = request.args.get('len', '')
-    if not token.isdigit():
-        token = '24'
+@app.route('/token', methods=['GET'])
+def generate_token():
+    argument = request.args.get('len', '')
+    if not argument.isdigit():
+        argument = '24'
+    elif int(argument) < 12:
+        argument = '12'
+    elif int(argument) > 4096:
+        argument = '4096'
     characters = string.ascii_letters + string.digits
-    password = ''.join(random.choice(characters) for _ in range(int(token)))
+    token = ''.join(random.choice(characters) for _ in range(int(argument)))
     
-    return {'key': password}
+    return {'key': token}
 
 @app.errorhandler(404)
 def page_not_found(e):
