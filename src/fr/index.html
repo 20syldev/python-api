@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Titre et Image de l'onglet / Liens vers le CSS -->
+    <title>Sylvain L. - API</title>
+    <meta content="text/html" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mobile.css') }}" media="handheld, only screen and (max-width: 1080px)"/>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='api.png') }}"/>
+  </head>
+  <body>
+    <!-- Titre / Bouton -->
+    <span id="title">Endpoints</span>
+    <input id="info" type="checkbox">
+    <label class="toggle" for="info">
+      <div id="bar4" class="bars"></div>
+      <div id="bar5" class="bars"></div>
+      <div id="bar6" class="bars"></div>
+    </label>
+    <br><br>
+    <!-- Blocs de texte d'informations -->
+    <pre id="infoTxt" style="color: #dddddd; transform: translateX(-100%); display: none;">
+      <span style="color: #ce70d3;">import</span> requests
+      <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"clé"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
+    </pre>
+    <!-- Affichage de tous les endpoints -->
+    <pre>
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/color">/color</a></span></b>
+        <i>Génère une couleur aléatoire.</i>
+
+        Clés :
+            - "hex" : génère une couleur en hexadécimal.
+            - "rgb" : génère une couleur en rouge-vert-bleu.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/domain">/domain</a></span></b>
+        <i>Renvoie un nom de site factice, un nom de domain et un TLD aléatoire.</i>
+
+        Clés :
+            - "domain" : génère un exemple d'URL.
+            - "random_name" : affiche un nom de site.
+            - "random_tld" : affiche une extension de site.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/lorem">/lorem</a>?len=<span style="color: #79e783;">{Nombre}</span></span></b>
+        <i>Affiche le nombre de phrases en "Lorem" que vous entrez en paramètre.</i>
+
+        Utilisation :
+            - <b><span style="color: #79e783;">{Nombre}</span></b> peut prendre en compte n'importe quel nombre entre 1 et 61.
+            - Une option vide ou invalide renverra la première phrase.
+
+        Clés :
+            - "text" : affiche le texte de la longueur donnée.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/personal">/personal</a></span></b>
+        <i>Génère une carte bancaire, un cvc, un email, une date d'expiration,
+        un nom, un pays, une profession et un numéro de téléphone factice aléatoirement.</i>
+
+        Clés :
+            - "card" : génère des numéros de carte bancaire.
+            - "cvc" : génère un cvc de carte bancaire.
+            - "email" : affiche un email.
+            - "expiration" : génère une date d'expiration de carte bancaire.
+            - "name" : affiche un nom et prénom.
+            - "localisation" : affiche les initiales d'un pays connu.
+            - "job" : affiche une profession.
+            - "tel" : affiche un numéro de téléphone.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/qrcode?url=https://sylvain.pro">/qrcode</a>?url=<span style="color: #d37070;">{URL}</span></span></b>
+        <i>Génère un QR code, redirigant vers un lien.</i>
+
+        Utilisation :
+            - <b><span style="color: #d37070;">{URL}</span></b> peut prendre en compte n'importe quel lien sur Internet.
+            - Une option vide ou invalide renverra une erreur.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/token">/token</a>?len=<span style="color: #79e783;">{Nombre}</span></span></b>
+        <i>Génère une clé (token) de la longueur que vous souhaitez.</i>
+
+        Utilisation :
+            - <b><span style="color: #79e783;">{Nombre}</span></b> peut prendre en compte n'importe quel nombre entre 12 et 4096.
+            - Une option vide ou invalide renverra un token de 24 caractères.
+
+        Clé :
+            - "key" : affiche la clé générée.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/username">/username</a></span></b>
+        <i>Renvoie une liste d'adjectifs, d'animaux, de professions, un nombre aléatoire et un pseudo aléatoire.</i>
+
+        Clés :
+            - "adjective" : affiche la liste d'adjectifs disponibles.
+            - "animal" : affiche la liste d'animaux disponibles.
+            - "number" : affiche un nombre aléatoire situé entre 0 et 99.
+            - "job" : affiche la liste des professions disponibles.
+            - "username" : affiche un nom d'utilisateur généré à l'aide des autres clés.
+    </pre>
+
+    <script>
+      // Animation quand le bouton est cliqué
+      document.getElementById("info").addEventListener("click", function() {
+        var info = document.getElementById("infoTxt");
+        if (info.style.display == 'none') {
+            info.style.display = 'block';
+
+            setTimeout(function() {
+              info.style.transform = 'translateX(0)';
+              info.style.transition = '1s';
+            }, 10);
+        } else {
+            info.style.transform = 'translateX(-100%)';
+            info.style.transition = '1s';
+            setTimeout(function() {
+              info.style.display = 'none';
+            }, 500);
+        }
+      });
+    </script>
+  </body>
+</html>
