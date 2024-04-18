@@ -20,7 +20,7 @@ Mais vous pouvez aussi l'utiliser, car tous les **endpoints** sont disponibles a
   - Voir la page d'accueil pour les découvrir !
 
 ## Récupérer une donnée
-Exemple sur `api.sylvain.pro/token`, qui récupère la clé renvoyée.
+Exemple sur **[api.sylvain.pro/token](https://api.sylvain.pro)**, qui récupère la clé renvoyée.
 ### Python
 ```py
 import requests
