@@ -2,25 +2,29 @@
   <a href="https://api.sylvain.pro"><img src="https://github.com/20syldev/api/blob/main/src/api.png" alt="Logo" width="25%" height="auto"></a>
 
 # API Publique - Sylvain
-  [![Badge1](https://img.shields.io/badge/Version%20:-v1.3.0-ee6464?labelColor=23272A)](https://api.sylvain.pro)
-  [![Badge2](https://img.shields.io/badge/Statut%20:-En%20ligne-42b85f?labelColor=23272A)](https://api.sylvain.pro)
+  [![Version](https://img.shields.io/badge/Version%20:-v1.3.0-ee6464?labelColor=23272A)](https://api.sylvain.pro)
+  [![Statut](https://img.shields.io/badge/Statut%20:-En%20ligne-42b85f?labelColor=23272A)](https://api.sylvain.pro)
+  [![Langue](https://img.shields.io/badge/Langue%20:-FR-3857ab?labelColor=23272A)](https://github.com/20syldev/api#readme)
 </div>
 
 ---
 
+[![Changer](https://img.shields.io/badge/Lang%20:-EN-3857ab?labelColor=23272A)](https://github.com/20syldev/api/blob/main/README.en.md)
+> *Click [here](https://github.com/20syldev/api/blob/main/README.en.md) to view the english version, or click on the button above.*
+
 ## À propos de l'API
-Voici mon API personnelle, disponible sur le domaine [sylvain.pro](https://api.sylvain.pro), en français **et en anglais**. 
-Vous pouvez l'utiliser sans limitations, car tous les **endpoints** sont publics !
+Voici mon API personnelle, disponible sur le domaine [sylvain.pro](https://api.sylvain.pro), en français et en anglais. 
+Vous pouvez l'utiliser **sans limitations**, car tous les **endpoints** sont publics !
 
 ## Les caractéristiques
 - Hébergé **24h/7j**
 - Utilisation simple et rapide
-- Disponible en **anglais**
+- Disponible en anglais
 - Endpoint multiples :
-  - Voir la page d'accueil pour les découvrir !
+  - Voir la [page d'accueil](https://api.sylvain.pro/fr) pour les découvrir !
 
 ## Récupérer une donnée
-Exemple sur **[api.sylvain.pro/token](https://api.sylvain.pro/fr/token)**, qui récupère la clé renvoyée.
+Exemple sur **[api.sylvain.pro/fr/token](https://api.sylvain.pro/fr/token)**, qui récupère la clé renvoyée.
 ### Python
 ```py
 import requests
