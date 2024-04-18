@@ -21,7 +21,7 @@ def lang(lang=None):
     elif lang == 'en':
         return render_template('en/index.html')
     # Erreur si aucune langue n'est spécifiée
-    return jsonify({'error': 'Language not found'})
+    return jsonify({'error': 'Language not found, please specify an existing language in the URL (/fr or /en)'})
 
 # Redirection du fichier
 @app.route('/<path:filename>')
