@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Titre et Image de l'onglet / Liens vers le CSS -->
+    <title>Sylvain L. - API</title>
+    <meta content="text/html" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mobile.css') }}" media="handheld, only screen and (max-width: 1080px)"/>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='api.png') }}"/>
+  </head>
+  <body>
+    <!-- Titre / Bouton -->
+    <span id="title">Endpoints</span>
+    <input id="info" type="checkbox">
+    <label class="toggle" for="info">
+      <div id="bar4" class="bars"></div>
+      <div id="bar5" class="bars"></div>
+      <div id="bar6" class="bars"></div>
+    </label>
+    <br><br>
+    <!-- Blocs de texte d'informations -->
+    <pre id="infoTxt" style="color: #dddddd; transform: translateX(-100%); display: none;">
+      <span style="color: #ce70d3;">import</span> requests
+      <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"clé"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
+    </pre>
+    <!-- Affichage de tous les endpoints -->
+    <pre>
+        <b><span style="color: #f1ce8c;">GET <a href="/en/color">/color</a></span></b>
+        <i>Generate a random color.</i>
+
+        Key:
+            - "hex": generates a color in hexadecimal.
+            - "rgb": generates a red-green-blue color.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/en/domain">/domain</a></span></b>
+        <i>Returns a fake site name, a domain name and a random TLD.</i>
+
+        Keys:
+            - "domain": generates a sample URL.
+            - "random_name": displays a site name.
+            - "random_tld": displays a site extension.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/en/lorem">/lorem</a>?len=<span style="color: #79e783;">{Number}</span></span></b>
+        <i>Displays the number of "Lorem" sentences you enter as parameters.</i>
+
+        Usage:
+            - <b><span style="color: #79e783;">{Number}</span></b> can take any number between 1 and 61.
+            - An empty or invalid option will return the first phrase.
+
+        Keys:
+            - "text": displays text of the given length.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/en/personal">/personal</a></span></b>
+        <i>Generates a credit card, cvc, email, expiration date,
+          a name, a country, a job and a random fake phone number.</i>
+
+        Keys:
+            - "card": generates credit card numbers.
+            - "cvc": generates a credit card cvc.
+            - "email": displays an email.
+            - "expiration": generates a credit card expiration date.
+            - "name": displays a first and last name.
+            - "localisation": displays the initials of a known country.
+            - "job": displays a job.
+            - "tel": displays a phone number.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/en/qrcode?url=https://sylvain.pro">/qrcode</a>?url=<span style="color: #d37070;">{URL}</span></span></b>
+        <i>Generates a QR code, redirecting to a link.</i>
+
+        Usage:
+            - <b><span style="color: #d37070;">{URL}</span></b> can be any link on the Internet.
+            - An empty or invalid option will return an error.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/en/token">/token</a>?len=<span style="color: #79e783;">{Number}</span></span></b>
+        <i>Generates a token of any length.</i>
+
+        Usage:
+            - <b><span style="color: #79e783;">{Number}</span></b> can be any number between 12 and 4096.
+            - An empty or invalid option will return a 24-character token.
+
+        Key:
+            - "key": displays the generated key.
+
+
+
+        <b><span style="color: #f1ce8c;">GET <a href="/en/username">/username</a></span></b>
+        <i>Returns a list of adjectives, animals, jobs, a random number and a random username.</i>
+
+        Keys:
+            - "adjective": displays the list of the available adjectives.
+            - "animal": displays a list of the available animals.
+            - "number": displays a random number between 0 and 99.
+            - "job": displays a list of the available professions.
+            - "username": displays a username generated using the other keys.
+    </pre>
+
+    <script>
+      // Animation quand le bouton est cliqué
+      document.getElementById("info").addEventListener("click", function() {
+        var info = document.getElementById("infoTxt");
+        if (info.style.display == 'none') {
+            info.style.display = 'block';
+
+            setTimeout(function() {
+              info.style.transform = 'translateX(0)';
+              info.style.transition = '1s';
+            }, 10);
+        } else {
+            info.style.transform = 'translateX(-100%)';
+            info.style.transition = '1s';
+            setTimeout(function() {
+              info.style.display = 'none';
+            }, 500);
+        }
+      });
+    </script>
+  </body>
+</html>
