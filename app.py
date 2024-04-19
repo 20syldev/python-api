@@ -106,9 +106,9 @@ def generate_qrcode(lang):
     url = request.args.get('url', '')
     if not url:
         if lang == 'en':
-            jsonify({'error': 'Please provide a valid argument (?url={URL})'})
+            return jsonify({'error': 'Please provide a valid argument (?url={URL})'})
         elif lang == 'fr':
-            jsonify({'erreur': 'Veuillez fournir un argument valide (?url={URL})'})
+            return jsonify({'erreur': 'Veuillez fournir un argument valide (?url={URL})'})
         else:
             return jsonify({'erreur': 'Veuillez fournir un argument valide (?url={URL})'})
 
