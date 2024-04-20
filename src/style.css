@@ -89,13 +89,13 @@ a:hover {
     overflow-x: hidden;
     position: relative;
     padding: 10px 10px;
-  }
+}
 
-  ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #222428;
     border-radius: 10vw;
-  }
+}
 
-  ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background-color: #333539;
-  }
+}
