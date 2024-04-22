@@ -21,7 +21,7 @@
     <!-- Informations text block -->
     <pre id="infoTxt" style="color: #dddddd; transform: translateX(-100%); display: none;">
       <span style="color: #ce70d3;">import</span> requests
-      <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"clé"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
+      <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/en/example"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"key"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
     </pre>
     <!-- Show all endpoints -->
     <pre>
@@ -44,7 +44,7 @@
 
 
 
-        <b><span style="color: #f1ce8c;">GET <a href="/en/lorem">/lorem</a>?len=<span style="color: #79e783;">{Number}</span></span></b>
+        <b><span style="color: #f1ce8c;">GET <a href="/en/lorem?len=10">/lorem</a>?len=<span style="color: #79e783;">{Number}</span></span></b>
         <i>Displays the number of "Lorem" sentences you enter as parameters.</i>
 
         Usage:
@@ -81,13 +81,13 @@
 
 
 
-        <b><span style="color: #f1ce8c;">GET <a href="/en/token">/token</a>?len=<span style="color: #79e783;">{Number}</span></span></b>
+        <b><span style="color: #f1ce8c;">GET <a href="/en/token?len=48?type=hex">/token</a>?len=<span style="color: #79e783;">{Number}</span>&type=<span style="color: #de94f7;">{Type}</span></span></b>
         <i>Generates a token of any length.</i>
 
         Usage:
-            - <b><span style="color: #79e783;">{Number}</span></b> can be any number between 12 and 4096.
+            - <b><span style="color: #79e783;">{Number}</span></b> can be any number between 12 and 4096. (Minimum security)
             - <b><span style="color: #de94f7;">{Type}</span></b> can contain the "alphanum" or "hex" option.
-            - An empty or invalid option will return a 24-character token.
+            - An empty or invalid option will return a 24-character token, with an alphanumeric type.
 
         Key:
             - "key": displays the generated key.
