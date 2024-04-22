@@ -125,21 +125,25 @@ def generate_qrcode(lang):
 
 # Génération de token
 def generate_token(lang):
-    argument = request.args.get('len', '')
-    type = request.args.get('type', '')
-    if not argument.isdigit():
-        argument = '24'
-    elif int(argument) < 12:
-        argument = '12'
-    elif int(argument) > 4096:
-        argument = '4096'
+    longueur = request.args.get('len', '')
+    tokenType = request.args.get('type', '')
 
-    if lang == 'alphanum':
-        token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(int(argument)))
-    elif lang == 'hex':
-        token = ''.join(random.choice('0123456789abcdef') for _ in range(int(argument)))
+    if not longueur.isdigit():
+        longueur = 24
     else:
-        token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(int(argument)))
+        longueur = int(longueur)
+        if longueur < 12:
+            longueur = 12
+        elif longueur > 4096:
+            longueur = 4096
+
+    if tokenType == 'alphanum':
+        token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(longueur))
+    elif tokenType == 'hex':
+        token_bytes = bytearray(random.randint(0, 255) for _ in range(longueur))
+        token = token_bytes.hex()
+    else:
+        token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(longueur))
     
     return jsonify({'key': token})
 
