@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <!-- Titre et Image de l'onglet / Liens vers le CSS -->
     <title>Sylvain L. - API</title>
@@ -81,12 +81,13 @@
 
 
 
-        <b><span style="color: #f1ce8c;">GET <a href="/fr/token">/token</a>?len=<span style="color: #79e783;">{Nombre}</span></span></b>
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/token">/token</a>?len=<span style="color: #79e783;">{Nombre}</span><span style="color: #de94f7;">{Type}</span></span></b>
         <i>Génère une clé (token) de la longueur que vous souhaitez.</i>
 
         Utilisation :
             - <b><span style="color: #79e783;">{Nombre}</span></b> peut prendre en compte n'importe quel nombre entre 12 et 4096.
-            - Une option vide ou invalide renverra un token de 24 caractères.
+            - <b><span style="color: #de94f7;">{Type}</span></b> peut contenir l'option "alphanum" ou "hex".
+            - Une option vide ou invalide renverra un token de 24 caractères, avec un type alphanumérique.
 
         Clé :
             - "key" : affiche la clé générée.
