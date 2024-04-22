@@ -21,7 +21,7 @@
     <!-- Blocs de texte d'informations -->
     <pre id="infoTxt" style="color: #dddddd; transform: translateX(-100%); display: none;">
       <span style="color: #ce70d3;">import</span> requests
-      <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"clé"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
+      <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/fr/exemple"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"clé"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
     </pre>
     <!-- Affichage de tous les endpoints -->
     <pre>
@@ -44,7 +44,7 @@
 
 
 
-        <b><span style="color: #f1ce8c;">GET <a href="/fr/lorem">/lorem</a>?len=<span style="color: #79e783;">{Nombre}</span></span></b>
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/lorem?len=10">/lorem</a>?len=<span style="color: #79e783;">{Nombre}</span></span></b>
         <i>Affiche le nombre de phrases en "Lorem" que vous entrez en paramètre.</i>
 
         Utilisation :
@@ -81,11 +81,11 @@
 
 
 
-        <b><span style="color: #f1ce8c;">GET <a href="/fr/token">/token</a>?len=<span style="color: #79e783;">{Nombre}</span><span style="color: #de94f7;">{Type}</span></span></b>
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/token?len=48?type=hex">/token</a>?len=<span style="color: #79e783;">{Nombre}</span>&type=<span style="color: #de94f7;">{Type}</span></span></b>
         <i>Génère une clé (token) de la longueur que vous souhaitez.</i>
 
         Utilisation :
-            - <b><span style="color: #79e783;">{Nombre}</span></b> peut prendre en compte n'importe quel nombre entre 12 et 4096.
+            - <b><span style="color: #79e783;">{Nombre}</span></b> peut prendre en compte n'importe quel nombre entre 12 et 4096. (Sécurité minimale)
             - <b><span style="color: #de94f7;">{Type}</span></b> peut contenir l'option "alphanum" ou "hex".
             - Une option vide ou invalide renverra un token de 24 caractères, avec un type alphanumérique.
 
