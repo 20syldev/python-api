@@ -126,13 +126,20 @@ def generate_qrcode(lang):
 # Génération de token
 def generate_token(lang):
     argument = request.args.get('len', '')
+    type = request.args.get('type', '')
     if not argument.isdigit():
         argument = '24'
     elif int(argument) < 12:
         argument = '12'
     elif int(argument) > 4096:
         argument = '4096'
-    token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(int(argument)))
+
+    if lang == 'alphanum':
+        token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(int(argument)))
+    elif lang == 'hex':
+        token = ''.join(random.choice('0123456789abcdef') for _ in range(int(argument))
+    else:
+        token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(int(argument)))
     
     return jsonify({'key': token})
 
