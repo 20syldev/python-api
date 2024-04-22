@@ -137,7 +137,7 @@ def generate_token(lang):
     if lang == 'alphanum':
         token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(int(argument)))
     elif lang == 'hex':
-        token = ''.join(random.choice('0123456789abcdef') for _ in range(int(argument))
+        token = ''.join(random.choice('0123456789abcdef') for _ in range(int(argument)))
     else:
         token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(int(argument)))
     
