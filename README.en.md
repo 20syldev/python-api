@@ -9,7 +9,7 @@
 
 ---
 
-[![Change](https://img.shields.io/badge/Lang%20:-FR-3857ab?labelColor=23272A)](https://github.com/20syldev/api#readme)
+[![Change](https://img.shields.io/badge/Langue%20:-FR-3857ab?labelColor=23272A)](https://github.com/20syldev/api#readme)
 > *Cliquez [ici](https://github.com/20syldev/api#readme) pour voir la version française, ou cliquez sur le bouton ci-dessus.*
 
 ## About the API
