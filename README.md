@@ -15,10 +15,11 @@
 ## À propos de l'API
 Voici mon API personnelle, disponible sur le domaine [sylvain.pro](https://api.sylvain.pro), en français et en anglais. 
 Vous pouvez l'utiliser **sans limitations**, car tous les **endpoints** sont publics !
+> *L'API peut prendre quelques secondes à charger, mais une fois fait, tout fonctionne très rapidement et les appels en console sont instantanés.*
 
 ## Les caractéristiques
 - Hébergé **24h/7j**
-- Utilisation simple et rapide
+- Utilisation simple
 - Disponible en anglais
 - Endpoint multiples :
   - Voir la [page d'accueil](https://api.sylvain.pro/fr) pour les découvrir !
