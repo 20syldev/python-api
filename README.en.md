@@ -15,10 +15,11 @@
 ## About the API
 This is my personal API, available on the [sylvain.pro](https://api.sylvain.pro/en) domain, in French and English. 
 You can use it **without limitations**, as all **endpoints** are public!
+> *The API may take a few seconds to load, but once it's done, everything works very quickly and requests are executed instantly.*
 
 ## Features
 - Hosted **24h/7d**
-- Fast and easy to use
+- Easy to use
 - Available in French
 - Multiple endpoints :
   - See the [home page](https://api.sylvain.pro/en) to discover them!
