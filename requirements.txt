@@ -1,7 +1,8 @@
 Flask
 Pillow
+firebase_admin
+flask-cors
 gunicorn
+python-dotenv
 qrcode
 requests
-python-dotenv
-flask-cors
