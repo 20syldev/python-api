@@ -182,13 +182,21 @@ def versions(lang):
             return jsonify({'erreur': 'Veuillez fournir une source valide (&source={SOURCE})'})
 
     elif source == 'github' and token == os.getenv("TOKEN"):
-        portfolio = requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' ')
-        api = requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' ')
-        database = requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' ')
-        doc_coopbot = requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' ')
-        coop_status = requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' ')
-        coop_api = requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' ')
-        nitrogen = requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' ')
+        try:
+            portfolio = requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' ')
+            api = requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' ')
+            database = requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' ')
+            doc_coopbot = requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' ')
+            coop_status = requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' ')
+            coop_api = requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' ')
+            nitrogen = requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' ')
+        except requests.exceptions.RequestException as e:
+            if lang == 'en':
+                return jsonify({'error': str(e)}), 500
+            elif lang == 'fr':
+                return jsonify({'erreur': str(e)}), 500
+            else:
+                return jsonify({'erreur': str(e)}), 500
 
     else:
         portfolio = '1.4.0'
