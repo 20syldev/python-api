@@ -2,4 +2,5 @@ Flask
 Pillow
 gunicorn
 qrcode
+requests
 python-dotenv
