@@ -156,14 +156,7 @@ def token(lang):
 
 # Mettre à jour Firebase
 def update_database():
-    firebaseConfig = credentials.Certificate({
-        'type': 'service_account',
-        'project_id': os.getenv('PROJECT_ID'),
-        'private_key_id': os.getenv('PRIVATE_KEY_ID'),
-        'private_key': os.getenv('PRIVATE_KEY'),
-        'client_email': os.getenv('CLIENT_EMAIL'),
-        'token_uri': 'https://oauth2.googleapis.com/token'
-    })
+    firebaseConfig = credentials.Certificate(os.getenv('KEYS'))
     firebase_admin.initialize_app(firebaseConfig)
     db = firestore.client()
     data = {
