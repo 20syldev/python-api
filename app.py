@@ -1,4 +1,4 @@
-import firebase_admin, io, os, qrcode, random, requests, schedule, string, time
+import firebase_admin, io, os, qrcode, random, requests, string
 from flask import Flask, render_template, send_from_directory, send_file, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
@@ -12,6 +12,16 @@ from firebase_admin import credentials, firestore, initialize_app
 app = Flask(__name__, template_folder='src', static_folder='src')
 load_dotenv()
 CORS(app)
+
+# Connecter la base
+firebaseConfig = credentials.Certificate({
+    'type': 'service_account',
+    'private_key_id': os.getenv('PRIVATE_KEY_ID'),
+    'private_key': os.getenv('PRIVATE_KEY'),
+    'client_email': os.getenv('CLIENT_EMAIL'),
+    'token_uri': 'https://oauth2.googleapis.com/token'
+})
+initialize_app(firebaseConfig)
 
 # Page d'accueil
 @app.route('/')
@@ -154,40 +164,33 @@ def token(lang):
     
     return jsonify({'key': token})
 
-# Mettre à jour Firebase
-def update_database():
-    firebaseConfig = credentials.Certificate(os.getenv('KEYS'))
-    firebase_admin.initialize_app(firebaseConfig)
-    db = firestore.client()
-    data = {
-        'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' '),
-        'api': requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' '),
-        'database': requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' '),
-        'doc_coopbot': requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' '),
-        'coop_status': requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' '),
-        'coop_api': requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' '),
-        'nitrogen': requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' ')
-    }
-    doc_ref = db.collection('versions').document('github')
-    doc_ref.set(data)
-update_database()
-while True:
-    schedule.run_pending()
-    time.sleep(1)
-schedule.every(10).minutes.do(update_database)
-
 # Affichage des versions de mes projets
 def versions(lang):
-    db = firestore.client()
-    data = db.collection('versions').document('github').get().to_dict()
+    try:
+        data = {
+            'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' '),
+            'api': requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' '),
+            'database': requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' '),
+            'doc_coopbot': requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' '),
+            'coop_status': requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' '),
+            'coop_api': requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' '),
+            'nitrogen': requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' ')
+        }
+        doc_ref = firestore.client().collection('versions').document('github')
+        doc_ref.set(data)
 
-    portfolio = data.get('portfolio', '')
-    api = data.get('api', '')
-    database = data.get('database', '')
-    doc_coopbot = data.get('doc_coopbot', '')
-    coop_status = data.get('coop_status', '')
-    coop_api = data.get('coop_api', '')
-    nitrogen = data.get('nitrogen', '')
+    except:
+        pass
+
+    version = firestore.client().collection('versions').document('github').get().to_dict()
+
+    portfolio = version.get('portfolio', '')
+    api = version.get('api', '')
+    database = version.get('database', '')
+    doc_coopbot = version.get('doc_coopbot', '')
+    coop_status = version.get('coop_status', '')
+    coop_api = version.get('coop_api', '')
+    nitrogen = version.get('nitrogen', '')
 
     return jsonify({'portfolio': portfolio, 'api': api, 'database': database, 'doc_coopbot': doc_coopbot, 'coop_status': coop_status, 'coop_api': coop_api, 'nitrogen': nitrogen})
 
