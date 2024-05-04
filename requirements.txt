@@ -2,4 +2,4 @@ Flask
 Pillow
 gunicorn
 qrcode
-https://github.com/theskumar/python-dotenv.git
+python-dotenv
