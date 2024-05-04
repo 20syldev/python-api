@@ -1,4 +1,5 @@
 from flask import Flask, render_template, send_from_directory, send_file, request, jsonify
+from flask_cors import CORS
 from datetime import datetime
 from PIL import Image
 from dotenv import load_dotenv
@@ -6,9 +7,10 @@ import random, requests, string, qrcode, os, io
 
 ############################## PRINCIPAL ##############################
 
-# Création de l'app Flask & Charger le dotenv
+# Création de l'app Flask, charger le dotenv & activer CORS
 app = Flask(__name__, template_folder='src', static_folder='src')
 load_dotenv()
+CORS(app)
 
 # Page d'accueil
 @app.route('/')
