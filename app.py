@@ -1,13 +1,14 @@
+import firebase_admin, io, os, qrcode, random, requests, schedule, string, time
 from flask import Flask, render_template, send_from_directory, send_file, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
 from PIL import Image
 from dotenv import load_dotenv
-import random, requests, string, qrcode, os, io
+from firebase_admin import credentials, firestore, initialize_app
 
 ############################## PRINCIPAL ##############################
 
-# Création de l'app Flask, charger le dotenv & activer CORS
+# Créer l'app Flask, charger le dotenv & activer CORS
 app = Flask(__name__, template_folder='src', static_folder='src')
 load_dotenv()
 CORS(app)
@@ -153,53 +154,47 @@ def token(lang):
     
     return jsonify({'key': token})
 
+# Mettre à jour Firebase
+def update_database():
+    firebaseConfig = credentials.Certificate({
+        'type': 'service_account',
+        'project_id': os.getenv('PROJECT_ID'),
+        'private_key_id': os.getenv('PRIVATE_KEY_ID'),
+        'private_key': os.getenv('PRIVATE_KEY'),
+        'client_email': os.getenv('CLIENT_EMAIL'),
+        'token_uri': 'https://oauth2.googleapis.com/token'
+    })
+    firebase_admin.initialize_app(firebaseConfig)
+    db = firestore.client()
+    data = {
+        'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' '),
+        'api': requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' '),
+        'database': requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' '),
+        'doc_coopbot': requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' '),
+        'coop_status': requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' '),
+        'coop_api': requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' '),
+        'nitrogen': requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' ')
+    }
+    doc_ref = db.collection('versions').document('github')
+    doc_ref.set(data)
+update_database()
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+schedule.every(10).minutes.do(update_database)
+
 # Affichage des versions de mes projets
 def versions(lang):
-    source = request.args.get('source', '')
-    token = request.args.get('token', '')
+    db = firestore.client()
+    data = db.collection('versions').document('github').get().to_dict()
 
-    if source == 'api':
-        portfolio = '1.4.0'
-        api = '1.3.0'
-        database = '1.0.1'
-        doc_coopbot = '1.0.0 alpha 0.9'
-        coop_status = '1.1.0'
-        coop_api = '1.3.0'
-        nitrogen = '1.1.0'
-
-    elif source == 'github' and token != os.getenv('TOKEN'):
-        if lang == 'en':
-            return jsonify({'error': 'Please provide a valid token (&token={TOKEN})'})
-        elif lang == 'fr':
-            return jsonify({'erreur': 'Veuillez fournir un token valide (&token={TOKEN})'})
-        else:
-            return jsonify({'erreur': 'Veuillez fournir un token valide (&token={TOKEN})'})
-
-    elif source != 'github' and token == os.getenv('TOKEN'):
-        if lang == 'en':
-            return jsonify({'error': 'Please provide a valid source (&source={SOURCE})'})
-        elif lang == 'fr':
-            return jsonify({'erreur': 'Veuillez fournir une source valide (&source={SOURCE})'})
-        else:
-            return jsonify({'erreur': 'Veuillez fournir une source valide (&source={SOURCE})'})
-
-    elif source == 'github' and token == os.getenv("TOKEN"):
-        portfolio = requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' ')
-        api = requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' ')
-        database = requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' ')
-        doc_coopbot = requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' ')
-        coop_status = requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' ')
-        coop_api = requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' ')
-        nitrogen = requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' ')
-
-    else:
-        portfolio = '1.4.0'
-        api = '1.3.0'
-        database = '1.0.1'
-        doc_coopbot = '1.0.0 alpha 0.9'
-        coop_status = '1.1.0'
-        coop_api = '1.3.0'
-        nitrogen = '1.1.0'
+    portfolio = data.get('portfolio', '')
+    api = data.get('api', '')
+    database = data.get('database', '')
+    doc_coopbot = data.get('doc_coopbot', '')
+    coop_status = data.get('coop_status', '')
+    coop_api = data.get('coop_api', '')
+    nitrogen = data.get('nitrogen', '')
 
     return jsonify({'portfolio': portfolio, 'api': api, 'database': database, 'doc_coopbot': doc_coopbot, 'coop_status': coop_status, 'coop_api': coop_api, 'nitrogen': nitrogen})
 
