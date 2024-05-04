@@ -4,3 +4,4 @@ gunicorn
 qrcode
 requests
 python-dotenv
+flask-cors
