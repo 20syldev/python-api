@@ -156,7 +156,7 @@ def token(lang):
 
 # Mettre à jour Firebase
 def update_database():
-    firebaseConfig = credentials.Certificate("dataKeys.json")
+    firebaseConfig = credentials.Certificate(os.getenv('KEYS'))
     firebase_admin.initialize_app(firebaseConfig)
     db = firestore.client()
     data = {
