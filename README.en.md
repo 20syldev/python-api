@@ -33,7 +33,14 @@ import requests
 print(requests.get("https://api.sylvain.pro/en/token").json()["key"])
 ```
 
-### JavaScript (Node.js)
+### JavaScript
+```js
+fetch('https://api.sylvain.pro/en/token')
+  .then(response => response.json())
+  .then(data => console.log(data.key));
+```
+
+### Node.js
 ```
 npm install https
 ```
