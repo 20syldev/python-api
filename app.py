@@ -175,11 +175,11 @@ def versions(lang):
 
     elif source != 'github' and token == os.getenv('TOKEN'):
         if lang == 'en':
-            return jsonify({'error': 'Please provide a valid source (?source={SOURCE}&token={TOKEN})'})
+            return jsonify({'error': 'Please provide a valid source (&source={SOURCE})'})
         elif lang == 'fr':
-            return jsonify({'erreur': 'Veuillez fournir une source valide (?source={SOURCE}&token={TOKEN})'})
+            return jsonify({'erreur': 'Veuillez fournir une source valide (&source={SOURCE})'})
         else:
-            return jsonify({'erreur': 'Veuillez fournir une source valide (?source={SOURCE}&token={TOKEN})'})
+            return jsonify({'erreur': 'Veuillez fournir une source valide (&source={SOURCE})'})
 
     elif source == 'github' and token == os.getenv("TOKEN"):
         portfolio = requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' ')
