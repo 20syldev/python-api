@@ -189,14 +189,6 @@ def versions(lang):
         coop_status = requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' ')
         coop_api = requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' ')
         nitrogen = requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' ')
-        
-        if portfolio.status_code != 200 or api.status_code != 200 or database.status_code != 200 or doc_coopbot.status_code != 200 or coop_status.status_code != 200 or coop_api.status_code != 200 or nitrogen.status_code != 200:
-            if lang == 'en':
-                return jsonify({'error': str(e)}), 500
-            elif lang == 'fr':
-                return jsonify({'erreur': str(e)}), 500
-            else:
-                return jsonify({'erreur': str(e)}), 500
 
     else:
         portfolio = '1.4.0'
