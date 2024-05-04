@@ -94,6 +94,27 @@
 
 
 
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/versions?source=github&token=TOKEN">/versions</a>?len=<span style="color: #7ccfff;">{Source}</span>&token=<span style="color: #d37070;">{Token}</span></span></b>
+        <i>Affiche les différentes versions des projets en cours.</i>
+
+        Utilisation :
+            - <b><span style="color: #7ccfff;">{Source}</span></b> peut contenir l'option "api" ou "github".
+            - <b><span style="color: #d37070;">{Token}</span></b> doit contenir le token, fourni sur demande.
+            - L'option "github" est obligatoirement accompagnée de l'option "token".
+            - L'option "api" renvoie la même chose que sans option.
+            - Une option vide renverra la liste des clés suivantes.
+
+        Clés :
+            - "api": affiche la version du dépôt <a href="https://github.com/20syldev/api">20syldev/api</a>
+            - "coop_api": affiche la version du dépôt <a href="https://github.com/20syldev/coop-api">20syldev/coop-api</a>
+            - "coop_status": affiche la version du dépôt <a href="https://github.com/20syldev/coop-status">20syldev/coop-status</a>
+            - "database": affiche la version du dépôt <a href="https://github.com/20syldev/database">20syldev/database"</a>
+            - "doc_coopbot": affiche la version du dépôt <a href="https://github.com/20syldev/doc-coopbot">20syldev/doc-coopbot</a>
+            - "nitrogen": affiche la version du dépôt <a href="https://github.com/20syldev/nitrogen">20syldev/nitrogen</a>
+            - "portfolio": affiche la version du dépôt <a href="https://github.com/20syldev/portfolio">20syldev/portfolio</a>
+
+
+
         <b><span style="color: #f1ce8c;">GET <a href="/fr/username">/username</a></span></b>
         <i>Renvoie une liste d'adjectifs, d'animaux, de professions, un nombre aléatoire et un pseudo aléatoire.</i>
 
