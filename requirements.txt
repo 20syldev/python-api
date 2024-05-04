@@ -3,5 +3,6 @@ Pillow
 firebase_admin
 flask-cors
 gunicorn
+python-dotenv
 qrcode
 requests
