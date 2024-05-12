@@ -180,6 +180,7 @@ def versions(lang):
         data = {
             'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' '),
             'api': requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' '),
+            'gitsite': requests.get('https://api.github.com/repos/20syldev/gitsite/releases').json()[0]['tag_name'].replace('-', ' '),
             'database': requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' '),
             'doc_coopbot': requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' '),
             'coop_status': requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' '),
@@ -196,13 +197,14 @@ def versions(lang):
 
     portfolio = version.get('portfolio', '')
     api = version.get('api', '')
+    gitsite = version.get('gitsite', '')
     database = version.get('database', '')
     doc_coopbot = version.get('doc_coopbot', '')
     coop_status = version.get('coop_status', '')
     coop_api = version.get('coop_api', '')
     nitrogen = version.get('nitrogen', '')
 
-    return jsonify({'portfolio': portfolio, 'api': api, 'database': database, 'doc_coopbot': doc_coopbot, 'coop_status': coop_status, 'coop_api': coop_api, 'nitrogen': nitrogen})
+    return jsonify({'portfolio': portfolio, 'api': api, 'gitsite': gitsite, 'database': database, 'doc_coopbot': doc_coopbot, 'coop_status': coop_status, 'coop_api': coop_api, 'nitrogen': nitrogen})
 
 # Génération de nom d'utilisateur
 def username(lang):
