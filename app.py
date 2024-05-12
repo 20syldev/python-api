@@ -58,6 +58,8 @@ def redirect_page(lang, endpoint):
         return color(lang)
     elif endpoint == 'domain':
         return domain(lang)
+    elif endpoint == 'infos':
+        return infos(lang)
     elif endpoint == 'lorem':
         return lorem(lang)
     elif endpoint == 'personal':
@@ -86,6 +88,13 @@ def domain(lang):
     extensions = ['.com', '.fr', '.eu', '.dev', '.net', '.org', '.io']
     domain = random.choice(noms) + random.choice(extensions)
     return jsonify({'domain': domain, 'random_name': random.choice(noms), 'random_tld': random.choice(extensions)})
+
+# Affichage d'informations sur l'API
+def infos(lang):
+    info = firestore.client().collection('infos').document('api').get().to_dict()
+    endpoints = info.get('endpoints', '')
+
+    return jsonify({'endpoints': endpoints})
 
 # Génération de texte Lorem
 def lorem(lang):
