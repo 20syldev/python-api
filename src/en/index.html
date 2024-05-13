@@ -12,17 +12,27 @@
     <!-- Title / Button -->
     <span id="title">Endpoints</span>
     <input id="info" type="checkbox">
+
     <label class="toggle" for="info">
       <div id="bar4" class="bars"></div>
       <div id="bar5" class="bars"></div>
       <div id="bar6" class="bars"></div>
     </label>
+
     <br><br>
+
     <!-- Informations text block -->
     <pre id="infoTxt" style="color: #dddddd; transform: translateX(-100%); display: none;">
-      <span style="color: #ce70d3;">import</span> requests
-      <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">"https://api.sylvain.pro/en/example"</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">"key"</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
+        <span style="color: #5d823f"># Python</span>
+        <span style="color: #ce70d3;">import</span> requests
+        <span style="color: #e6e7a9;">print</span><span style="color: #ffd700;">(</span>requests.get<span style="color: #ce70d3;">(</span><span style="color: #db9777;">'https://api.sylvain.pro/en/token'</span><span style="color: #ce70d3;">)</span>.json<span style="color: #ce70d3;">()[</span><span style="color: #db9777;">'key'</span><span style="color: #ce70d3;">]</span><span style="color: #ffd700;">)</span>
+        
+        <span style="color: #5d823f">// JavaScript</span>
+        <span style="color: #e6e7a9;">fetch</span><span style="color: #ffd700;">(<span style="color: #db9777;">'https://api.sylvain.pro/en/token'</span>)</span>
+          <span style="color: #e6e7a9;">.then</span><span style="color: #ffd700;">(<span style="color: #a0c6ff">response <span style="color: #4f7ec5;">=></span> response</span><span style="color: #e6e7a9;">.json</span><span style="color: #ce70d3;">()</span>)</span>
+          <span style="color: #e6e7a9;">.then</span><span style="color: #ffd700;">(<span style="color: #a0c6ff">data <span style="color: #4f7ec5;">=></span> console</span><span style="color: #e6e7a9;">.log</span><span style="color: #ce70d3;">(<span style="color: #a0c6ff">data.key</span>)</span>)</span>;
     </pre>
+
     <!-- Show all endpoints -->
     <pre>
         <b><span style="color: #f1ce8c;">GET <a href="/en/color">/color</a></span></b>
@@ -44,7 +54,7 @@
 
 
 
-        <b><span style="color: #f1ce8c;">GET <a href="/fr/infos">/infos</a></span></b>
+        <b><span style="color: #f1ce8c;">GET <a href="/en/infos">/infos</a></span></b>
         <i>Displays some information about the API</i>
 
         Key:
