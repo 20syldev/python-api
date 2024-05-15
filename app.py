@@ -109,13 +109,14 @@ def lorem(lang):
 
 # Génération d'informations personnelles
 def personal(lang):
-    noms = ['John Doe', 'Jane Martin', 'Michael Johnson', 'Emily Davis', 'Alexis Barbos']
-    emails = ['john@example.com', 'jane@example.com', 'michael@example.com', 'emily@example.com', 'alexis@example.com']
-    tel = ['123-456-7890', '06 78 90 12 34', '7911 123456', '678 901 234', '163 555 1584']
-    pays = ['US', 'FR', 'UK', 'ES', 'DE']
-    job = ['Writer', 'Artist', 'Musician', 'Explorer', 'Scientist', 'Engineer', 'Athlete', 'Doctor', 'Teacher', 'Lawyer', 'Entrepreneur', 'Actor', 'Dancer', 'Photographer', 'Architect', 'Pilot', 'Designer', 'Journalist', 'Veterinarian']
     carte = ' '.join([str(random.randint(1000, 9999)) for _ in range(4)])
     cvc = random.randint(100, 999)
+    emails = ['john@example.com', 'jane@example.com', 'michael@example.com', 'emily@example.com', 'alexis@example.com']
+    job = ['Writer', 'Artist', 'Musician', 'Explorer', 'Scientist', 'Engineer', 'Athlete', 'Doctor', 'Teacher', 'Lawyer', 'Entrepreneur', 'Actor', 'Dancer', 'Photographer', 'Architect', 'Pilot', 'Designer', 'Journalist', 'Veterinarian']
+    noms = ['John Doe', 'Jane Martin', 'Michael Johnson', 'Emily Davis', 'Alexis Barbos']
+    pays = ['US', 'FR', 'UK', 'ES', 'DE']
+    tel = ['123-456-7890', '06 78 90 12 34', '7911 123456', '678 901 234', '163 555 1584']
+
     annee = str(random.randint(datetime.now().year, datetime.now().year + 3))[-2:]
     mois = random.randint(1, 12)
     
@@ -126,7 +127,7 @@ def personal(lang):
     else:
         date = f'{mois}/{annee}'
         
-    return jsonify({'name': noms[i], 'email': emails[i], 'tel': tel[i], 'localisation': pays[i], 'job': random.choice(job), 'card': carte, 'cvc': cvc, 'expiration': date})
+    return jsonify({'card': carte, 'cvc': cvc, 'email': emails[i], 'expiration': date, 'job': random.choice(job), 'localisation': pays[i], 'name': noms[i], 'tel': tel[i]})
 
 # Génération de QR code
 def qrcode(lang):
@@ -178,14 +179,14 @@ def token(lang):
 def versions(lang):
     try:
         data = {
-            'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' '),
             'api': requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' '),
-            'gitsite': requests.get('https://api.github.com/repos/20syldev/gitsite/releases').json()[0]['tag_name'].replace('-', ' '),
+            'coop_api': requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' '),
+            'coop_status': requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' '),
             'database': requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' '),
             'doc_coopbot': requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' '),
-            'coop_status': requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' '),
-            'coop_api': requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' '),
-            'nitrogen': requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' ')
+            'gitsite': requests.get('https://api.github.com/repos/20syldev/gitsite/releases').json()[0]['tag_name'].replace('-', ' '),
+            'nitrogen': requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' '),
+            'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' ')
         }
         doc_ref = firestore.client().collection('versions').document('github')
         doc_ref.set(data)
@@ -195,16 +196,16 @@ def versions(lang):
 
     version = firestore.client().collection('versions').document('github').get().to_dict()
 
-    portfolio = version.get('portfolio', '')
     api = version.get('api', '')
-    gitsite = version.get('gitsite', '')
+    coop_api = version.get('coop_api', '')
+    coop_status = version.get('coop_status', '')
     database = version.get('database', '')
     doc_coopbot = version.get('doc_coopbot', '')
-    coop_status = version.get('coop_status', '')
-    coop_api = version.get('coop_api', '')
+    gitsite = version.get('gitsite', '')
     nitrogen = version.get('nitrogen', '')
+    portfolio = version.get('portfolio', '')
 
-    return jsonify({'portfolio': portfolio, 'api': api, 'gitsite': gitsite, 'database': database, 'doc_coopbot': doc_coopbot, 'coop_status': coop_status, 'coop_api': coop_api, 'nitrogen': nitrogen})
+    return jsonify({'api': api, 'coop_api': coop_api, 'coop_status': coop_status, 'database': database, 'doc_coopbot': doc_coopbot, 'gitsite': gitsite, 'nitrogen': nitrogen, 'portfolio': portfolio})
 
 # Génération de nom d'utilisateur
 def username(lang):
@@ -231,7 +232,7 @@ def username(lang):
     elif choix == 'pro_ani_num':
         username = random.choice(job) + random.choice(ani) + nombre
     
-    return jsonify({'username': username, 'adjective': adj, 'animal': ani, 'job': job, 'number': nombre})
+    return jsonify({'adjective': adj, 'animal': ani, 'job': job, 'number': nombre, 'username': username})
 
 ################################# HOST ###################################
 
