@@ -99,12 +99,20 @@
 
 
 
-        <b><span style="color: #f1ce8c;">GET <a href="/fr/token?len=48&type=hex">/token</a>?len=<span style="color: #79e783;">{Nombre}</span>&type=<span style="color: #de94f7;">{Type}</span></span></b>
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/token?len=48&type=alphanum">/token</a>?len=<span style="color: #79e783;">{Nombre}</span>&type=<span style="color: #de94f7;">{Type}</span></span></b>
         <i>Génère une clé (token) de la longueur que vous souhaitez.</i>
 
         Utilisation :
             - <b><span style="color: #79e783;">{Nombre}</span></b> peut prendre en compte n'importe quel nombre entre 12 et 4096. (Sécurité minimale)
-            - <b><span style="color: #de94f7;">{Type}</span></b> peut contenir l'option "alphanum" ou "hex".
+            - <b><span style="color: #de94f7;">{Type}</span></b> peut contenir les options suivantes :
+                - "<a href="/fr/token?len=48&type=alpha">alpha</a>" : Génère un token uniquement composé de lettres (majuscules et minuscules).
+                - "<a href="/fr/token?len=48&type=alphanum">num</a>" : Génère un token composé de lettres (majuscules et minuscules) et de chiffres.
+                - "<a href="/fr/token?len=48&type=base64">base64</a>" : Génère un token encodé en base64.
+                - "<a href="/fr/token?len=48&type=hex">hex</a>" : Génère un token hexadécimal, composé de chiffres (0-9) et de lettres (a-f).
+                - "<a href="/fr/token?len=48&type=num">num</a>" : Génère un token uniquement composé de chiffres.
+                - "<a href="/fr/token?len=48&type=punct">punct</a>" : Génère un token uniquement composé de caractères de ponctuation.
+                - "<a href="/fr/token?len=48&type=urlsafe">urlsafe</a>" : Génère un token qui utilise des caractères sûrs pour les URLs (lettres, chiffres, -, et _).
+                - "<a href="/fr/token?len=48&type=uuid">uuid</a>" : Génère un token sous forme d'identifiant universellement unique.
             - Une option vide ou invalide renverra un token de 24 caractères, avec un type alphanumérique.
 
         Clé :
