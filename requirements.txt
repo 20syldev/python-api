@@ -6,3 +6,4 @@ gunicorn
 python-dotenv
 qrcode
 requests
+uuid
