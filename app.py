@@ -1,4 +1,4 @@
-import firebase_admin, io, os, qrcode, random, requests, string
+import base64, firebase_admin, io, qrcode, random, requests, string, uuid
 from flask import Flask, render_template, send_from_directory, send_file, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
@@ -171,11 +171,26 @@ def token(lang):
         elif longueur > 4096:
             longueur = 4096
 
-    if tokenType == 'alphanum':
+    if tokenType == 'alpha':
+        token = ''.join(random.choice(string.ascii_letters) for _ in range(longueur))
+    elif tokenType == 'alphanum':
         token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(longueur))
+    elif tokenType == 'base64':
+        random_bytes = bytearray(random.getrandbits(8) for _ in range(longueur))
+        token = base64.urlsafe_b64encode(random_bytes).decode('utf-8')
+        token = token[:longueur]
     elif tokenType == 'hex':
         token_bytes = bytearray(random.randint(0, 255) for _ in range(longueur))
         token = token_bytes.hex()
+        token = token[:longueur]
+    elif tokenType == 'num':
+        token = ''.join(random.choice(string.digits) for _ in range(longueur))
+    elif tokenType == 'punct':
+        token = ''.join(random.choice(string.punctuation) for _ in range(longueur))
+    elif tokenType == 'urlsafe':
+        token = ''.join(random.choice(string.ascii_letters + string.digits + '-_') for _ in range(longueur))
+    elif tokenType == 'uuid':
+        token = str(uuid.uuid4())
     else:
         token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(longueur))
     
