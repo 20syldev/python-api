@@ -2,7 +2,7 @@ import base64, firebase_admin, io, qrcode, random, requests, string, uuid
 from flask import Flask, render_template, send_from_directory, send_file, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from dotenv import load_dotenv
 from firebase_admin import credentials, firestore, initialize_app
 
@@ -47,7 +47,9 @@ def redirect_page(lang, endpoint):
         return jsonify({'error': 'Please specify language in the URL (/fr or /en)'})
     
     # Fonction exécutée en fonction du service demandé
-    if endpoint == 'color':
+    if endpoint == 'captcha':
+        return captcha(lang)
+    elif endpoint == 'color':
         return color(lang)
     elif endpoint == 'domain':
         return domain(lang)
@@ -69,6 +71,43 @@ def redirect_page(lang, endpoint):
         return jsonify({'error': 'Endpoint not found'})
 
 ####################### FONCTIONS DES ENDPOINTS #########################
+
+# Génération de captcha
+def captcha(lang):
+    captcha = request.args.get('text', '')
+
+    if not captcha:
+        if lang == 'en':
+            return jsonify({'error': 'Please provide a valid argument (?text={Text})'})
+        elif lang == 'fr':
+            return jsonify({'erreur': 'Veuillez fournir un argument valide (?text={Texte})'})
+        else:
+            return jsonify({'erreur': 'Veuillez fournir un argument valide (?text={Texte})'})
+
+    size = 60
+    font = ImageFont.truetype("src/font.otf", size)
+    witdh = len(captcha) * size
+    image = Image.new('RGB', (witdh, 100), color=(255, 255, 255))
+    
+    d = ImageDraw.Draw(image)
+    x = (image.width + 20 - witdh) / 2
+    y = (image.height - size) / 2
+    
+    char_width = size * 1
+    
+    for char in captcha:
+        color = (random.randint(0, 192), random.randint(0, 192), random.randint(0, 192))
+        d.text((x, y), char, fill=color, font=font)
+        x += char_width
+
+    for _ in range(100):
+        d.point((random.randint(0, 400), random.randint(0, 100)), fill=(0, 0, 0))
+
+    img_buffer = io.BytesIO()
+    image.save(img_buffer, format='PNG')
+    img_buffer.seek(0)
+
+    return send_file(img_buffer, mimetype='image/png')
 
 # Génération de couleurs
 def color(lang):
