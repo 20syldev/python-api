@@ -13,16 +13,9 @@ app = Flask(__name__, template_folder='src', static_folder='src')
 load_dotenv()
 CORS(app)
 
-# Connecter la base
-firebaseConfig = credentials.Certificate({
-    'type': 'service_account',
-    'project_id': 'api-20syl',
-    'private_key_id': '7d4416396ab3f30736399d5a2aa834e56d32a256',
-    'private_key': '-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDCgUz4NGkW6xAn\nwJX6VoedGBg+kOAK1YWe7+Z3PNd7RNCeuLfYZiwO6DKfXB+C6uHJPD0udUxN5Zsi\nMpZC/12hW/+pQOcaYiOkPA+qyOBFsaftUQ1or/lZIqtsq+6ISNaqP0rbeWE94fzV\njSjUPJKNp+QCZcS+aIzhl5CRmYx0qGuBf/WNVq+rVNrH/yScjty06+lYyNCzpuyj\nzBEtXQuttiOkND4Pi3E3HgXg/sMommb0A0vauq0e2X4tUGCIrx50qdYTjEcFCUrw\nXCiAcoNckjo7Gz0idXSnKzIzlCQyAn095m/kswq0rQ9yPYOirpRDqG2Uh3c74nJY\nP53fhkw7AgMBAAECggEAGXyO5OEdOhsQEV1raZOoDn4nQx+Bs/m5mhNuXAZ1Z9oj\nCgFDWdA9irCDXZ1ZJbL4ZgGGNM2682QYOVlulhXXI3smG3v9LFhauj0Cgory1D8M\ntYyO2L5iSntAAivfRC1jL4i+mtajVtQDaMon5POQ8o3i0yuZpaeWekL9dw6rOGfU\nbmXywAwmLblAzMAsyBN2WrIXh603JTj3yvGkUau9sxW/VcN8iR9iuD4Svt7i7eGw\npND0/ZWQSzkw6B1QCtqrn370BFUovTKN1ppzcmtA8M9wnQFpUJGakmQjzeoUqjhx\nvkEFrnCYoNSygIftD9Tm1xvW3Y7pIfG6WzjVuoGCqQKBgQD3plZpezoEAtd3+QDq\nMug++hFu55ILhnST+Lt5RvDYq/8092+wBDntlkMhT8cAeopdBhCsZ1TPy9OYZJl4\nocORfsC1wQZKQROrCq9Rs7SLnXr/JroDPICNBAH5IrF0wfe0SbQZSf+JPnHxLQr/\nlcR5l3anyjfyj2LMRdbzbO5zswKBgQDJEDqjouQZDXX+ANozbfOD3UWFpKFViXzI\njPkI9oiZDd0yY8Q7oQuc1Fv9HjvV6i/68wrZkM37eCceKXlEdaICFQfj/eKm6isL\nYA39qXhN3iwKfVuRRjQCkk/G/lEaHxZ0/GbOo3UQpSiFdBeBJq/dHPLEsLmI2gYZ\n6wXrSnIhWQKBgECNiDrIly/Sec3ZB0cE7Ar2bjLlg+kjLCIiFOQg/MjN1KE+2ksc\nXukyYN8/B1V1m7lxykjWSoI71DUGDAcoy2ySiLMX1IbofbL4/wgh+q7l5ti5hIUx\ncSTQ5Z7GT1Fq+iFxkNOCuWxR7at7HUHQDT3QoGpOSNUeUReEIOqk+2cHAoGBAIpw\nzz9+2Dnbx+OmKJgC3ApuoAD+M0wXR8E7N/oQ7kscfbLFeQdpwvowSkqFt8N55aGQ\nGWdmyj2dJKoi+mnF6VAvtOgqFxbA4/SIJfoD518OXBq46ASmZwdiQOYOlD89KpRQ\nemVLrT5Ryg3hupFl1u+TkCEYYhe1rz/HUKMK9ny5AoGBAJkwFqm4MCB0FlweGLbV\nIQkBWiI2gpGoudH3+uhhhMc5zkmQLkgYeh4aWmsjK3o6/vb/cz+wTyXqMerEEZ9B\ntLbf/xYmA4r9x86b7ESocmph/lmqozSAQ45OnGwI+bBx6gGQL5XhriUClf+AZKJP\nr8JWnKEyRknk4mJiBvB6hNTv\n-----END PRIVATE KEY-----\n',
-    'client_email': 'firebase-adminsdk-tu2qm@api-20syl.iam.gserviceaccount.com',
-    'token_uri': 'https://oauth2.googleapis.com/token'
-})
-initialize_app(firebaseConfig)
+# Variables Firebase
+firebase_init = False
+firebase_app = None
 
 # Page d'accueil
 @app.route('/')
@@ -91,6 +84,19 @@ def domain(lang):
 
 # Affichage d'informations sur l'API
 def infos(lang):
+    global firebase_init, firebase_app
+    if not firebase_init:
+        firebaseConfig = credentials.Certificate({
+            'type': 'service_account',
+            'project_id': 'api-20syl',
+            'private_key_id': '7d4416396ab3f30736399d5a2aa834e56d32a256',
+            'private_key': '-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDCgUz4NGkW6xAn\nwJX6VoedGBg+kOAK1YWe7+Z3PNd7RNCeuLfYZiwO6DKfXB+C6uHJPD0udUxN5Zsi\nMpZC/12hW/+pQOcaYiOkPA+qyOBFsaftUQ1or/lZIqtsq+6ISNaqP0rbeWE94fzV\njSjUPJKNp+QCZcS+aIzhl5CRmYx0qGuBf/WNVq+rVNrH/yScjty06+lYyNCzpuyj\nzBEtXQuttiOkND4Pi3E3HgXg/sMommb0A0vauq0e2X4tUGCIrx50qdYTjEcFCUrw\nXCiAcoNckjo7Gz0idXSnKzIzlCQyAn095m/kswq0rQ9yPYOirpRDqG2Uh3c74nJY\nP53fhkw7AgMBAAECggEAGXyO5OEdOhsQEV1raZOoDn4nQx+Bs/m5mhNuXAZ1Z9oj\nCgFDWdA9irCDXZ1ZJbL4ZgGGNM2682QYOVlulhXXI3smG3v9LFhauj0Cgory1D8M\ntYyO2L5iSntAAivfRC1jL4i+mtajVtQDaMon5POQ8o3i0yuZpaeWekL9dw6rOGfU\nbmXywAwmLblAzMAsyBN2WrIXh603JTj3yvGkUau9sxW/VcN8iR9iuD4Svt7i7eGw\npND0/ZWQSzkw6B1QCtqrn370BFUovTKN1ppzcmtA8M9wnQFpUJGakmQjzeoUqjhx\nvkEFrnCYoNSygIftD9Tm1xvW3Y7pIfG6WzjVuoGCqQKBgQD3plZpezoEAtd3+QDq\nMug++hFu55ILhnST+Lt5RvDYq/8092+wBDntlkMhT8cAeopdBhCsZ1TPy9OYZJl4\nocORfsC1wQZKQROrCq9Rs7SLnXr/JroDPICNBAH5IrF0wfe0SbQZSf+JPnHxLQr/\nlcR5l3anyjfyj2LMRdbzbO5zswKBgQDJEDqjouQZDXX+ANozbfOD3UWFpKFViXzI\njPkI9oiZDd0yY8Q7oQuc1Fv9HjvV6i/68wrZkM37eCceKXlEdaICFQfj/eKm6isL\nYA39qXhN3iwKfVuRRjQCkk/G/lEaHxZ0/GbOo3UQpSiFdBeBJq/dHPLEsLmI2gYZ\n6wXrSnIhWQKBgECNiDrIly/Sec3ZB0cE7Ar2bjLlg+kjLCIiFOQg/MjN1KE+2ksc\nXukyYN8/B1V1m7lxykjWSoI71DUGDAcoy2ySiLMX1IbofbL4/wgh+q7l5ti5hIUx\ncSTQ5Z7GT1Fq+iFxkNOCuWxR7at7HUHQDT3QoGpOSNUeUReEIOqk+2cHAoGBAIpw\nzz9+2Dnbx+OmKJgC3ApuoAD+M0wXR8E7N/oQ7kscfbLFeQdpwvowSkqFt8N55aGQ\nGWdmyj2dJKoi+mnF6VAvtOgqFxbA4/SIJfoD518OXBq46ASmZwdiQOYOlD89KpRQ\nemVLrT5Ryg3hupFl1u+TkCEYYhe1rz/HUKMK9ny5AoGBAJkwFqm4MCB0FlweGLbV\nIQkBWiI2gpGoudH3+uhhhMc5zkmQLkgYeh4aWmsjK3o6/vb/cz+wTyXqMerEEZ9B\ntLbf/xYmA4r9x86b7ESocmph/lmqozSAQ45OnGwI+bBx6gGQL5XhriUClf+AZKJP\nr8JWnKEyRknk4mJiBvB6hNTv\n-----END PRIVATE KEY-----\n',
+            'client_email': 'firebase-adminsdk-tu2qm@api-20syl.iam.gserviceaccount.com',
+            'token_uri': 'https://oauth2.googleapis.com/token'
+        })
+        firebase_app = initialize_app(firebaseConfig)
+        firebase_init = True
+
     info = firestore.client().collection('infos').document('api').get().to_dict()
     endpoints = info.get('endpoints', '')
 
@@ -177,6 +183,19 @@ def token(lang):
 
 # Affichage des versions de mes projets
 def versions(lang):
+    global firebase_init, firebase_app
+    if not firebase_init:
+        firebaseConfig = credentials.Certificate({
+            'type': 'service_account',
+            'project_id': 'api-20syl',
+            'private_key_id': '7d4416396ab3f30736399d5a2aa834e56d32a256',
+            'private_key': '-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDCgUz4NGkW6xAn\nwJX6VoedGBg+kOAK1YWe7+Z3PNd7RNCeuLfYZiwO6DKfXB+C6uHJPD0udUxN5Zsi\nMpZC/12hW/+pQOcaYiOkPA+qyOBFsaftUQ1or/lZIqtsq+6ISNaqP0rbeWE94fzV\njSjUPJKNp+QCZcS+aIzhl5CRmYx0qGuBf/WNVq+rVNrH/yScjty06+lYyNCzpuyj\nzBEtXQuttiOkND4Pi3E3HgXg/sMommb0A0vauq0e2X4tUGCIrx50qdYTjEcFCUrw\nXCiAcoNckjo7Gz0idXSnKzIzlCQyAn095m/kswq0rQ9yPYOirpRDqG2Uh3c74nJY\nP53fhkw7AgMBAAECggEAGXyO5OEdOhsQEV1raZOoDn4nQx+Bs/m5mhNuXAZ1Z9oj\nCgFDWdA9irCDXZ1ZJbL4ZgGGNM2682QYOVlulhXXI3smG3v9LFhauj0Cgory1D8M\ntYyO2L5iSntAAivfRC1jL4i+mtajVtQDaMon5POQ8o3i0yuZpaeWekL9dw6rOGfU\nbmXywAwmLblAzMAsyBN2WrIXh603JTj3yvGkUau9sxW/VcN8iR9iuD4Svt7i7eGw\npND0/ZWQSzkw6B1QCtqrn370BFUovTKN1ppzcmtA8M9wnQFpUJGakmQjzeoUqjhx\nvkEFrnCYoNSygIftD9Tm1xvW3Y7pIfG6WzjVuoGCqQKBgQD3plZpezoEAtd3+QDq\nMug++hFu55ILhnST+Lt5RvDYq/8092+wBDntlkMhT8cAeopdBhCsZ1TPy9OYZJl4\nocORfsC1wQZKQROrCq9Rs7SLnXr/JroDPICNBAH5IrF0wfe0SbQZSf+JPnHxLQr/\nlcR5l3anyjfyj2LMRdbzbO5zswKBgQDJEDqjouQZDXX+ANozbfOD3UWFpKFViXzI\njPkI9oiZDd0yY8Q7oQuc1Fv9HjvV6i/68wrZkM37eCceKXlEdaICFQfj/eKm6isL\nYA39qXhN3iwKfVuRRjQCkk/G/lEaHxZ0/GbOo3UQpSiFdBeBJq/dHPLEsLmI2gYZ\n6wXrSnIhWQKBgECNiDrIly/Sec3ZB0cE7Ar2bjLlg+kjLCIiFOQg/MjN1KE+2ksc\nXukyYN8/B1V1m7lxykjWSoI71DUGDAcoy2ySiLMX1IbofbL4/wgh+q7l5ti5hIUx\ncSTQ5Z7GT1Fq+iFxkNOCuWxR7at7HUHQDT3QoGpOSNUeUReEIOqk+2cHAoGBAIpw\nzz9+2Dnbx+OmKJgC3ApuoAD+M0wXR8E7N/oQ7kscfbLFeQdpwvowSkqFt8N55aGQ\nGWdmyj2dJKoi+mnF6VAvtOgqFxbA4/SIJfoD518OXBq46ASmZwdiQOYOlD89KpRQ\nemVLrT5Ryg3hupFl1u+TkCEYYhe1rz/HUKMK9ny5AoGBAJkwFqm4MCB0FlweGLbV\nIQkBWiI2gpGoudH3+uhhhMc5zkmQLkgYeh4aWmsjK3o6/vb/cz+wTyXqMerEEZ9B\ntLbf/xYmA4r9x86b7ESocmph/lmqozSAQ45OnGwI+bBx6gGQL5XhriUClf+AZKJP\nr8JWnKEyRknk4mJiBvB6hNTv\n-----END PRIVATE KEY-----\n',
+            'client_email': 'firebase-adminsdk-tu2qm@api-20syl.iam.gserviceaccount.com',
+            'token_uri': 'https://oauth2.googleapis.com/token'
+        })
+        firebase_app = initialize_app(firebaseConfig)
+        firebase_init = True
+        
     try:
         data = {
             'api': requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' '),
@@ -188,8 +207,8 @@ def versions(lang):
             'nitrogen': requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' '),
             'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' ')
         }
-        doc_ref = firestore.client().collection('versions').document('github')
-        doc_ref.set(data)
+        version_data = firestore.client().collection('versions').document('github')
+        version_data.set(data)
 
     except:
         pass
