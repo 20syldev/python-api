@@ -99,12 +99,20 @@
 
 
 
-        <b><span style="color: #f1ce8c;">GET <a href="/en/token?len=48&type=hex">/token</a>?len=<span style="color: #79e783;">{Number}</span>&type=<span style="color: #de94f7;">{Type}</span></span></b>
+        <b><span style="color: #f1ce8c;">GET <a href="/en/token?len=48&type=alphanum">/token</a>?len=<span style="color: #79e783;">{Number}</span>&type=<span style="color: #de94f7;">{Type}</span></span></b>
         <i>Generates a token of any length.</i>
 
         Usage:
             - <b><span style="color: #79e783;">{Number}</span></b> can be any number between 12 and 4096. (Minimum security)
-            - <b><span style="color: #de94f7;">{Type}</span></b> can contain the "alphanum" or "hex" option.
+            - <b><span style="color: #de94f7;">{Type}</span></b> can contain the following options:
+                - "<a href="/en/token?len=48&type=alpha">alpha</a>": Generates a token containing only letters (upper and lower case).
+                - "<a href="/en/token?len=48&type=alphanum">num</a>": Generates a token containing letters (upper and lower case) and digits (0-9).
+                - "<a href="/en/token?len=48&type=base64">base64</a>": Generates a base64-encoded token.
+                - "<a href="/en/token?len=48&type=hex">hex</a>": Generates a hexadecimal token, composed of digits (0-9) and letters (a-f).
+                - "<a href="/en/token?len=48&type=num">num</a>": Generates a token containing digits only.
+                - "<a href="/en/token?len=48&type=punct">punct</a>": Generates a token containing punctuation characters only.
+                - "<a href="/en/token?len=48&type=urlsafe">urlsafe</a>": Generates a token that uses safe characters for URLs (letters, digits, -, and _).
+                - "<a href="/en/token?len=48&type=uuid">uuid</a>": Generates a token as a unique universal id.
             - An empty or invalid option will return a 24-character token, with an alphanumeric type.
 
         Key:
