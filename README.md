@@ -2,7 +2,7 @@
   <a href="https://api.sylvain.pro"><img src="https://github.com/20syldev/api/blob/main/src/api.png" alt="Logo" width="25%" height="auto"></a>
 
 # API Publique - Sylvain
-  [![Version](https://img.shields.io/badge/Version%20:-v1.4.4-ee6464?labelColor=23272A)](https://github.com/20syldev/api/releases/latest)
+  [![Version](https://img.shields.io/badge/Version%20:-v1.4.5-ee6464?labelColor=23272A)](https://github.com/20syldev/api/releases/latest)
   [![Statut](https://img.shields.io/badge/Statut%20:-En%20ligne-42b85f?labelColor=23272A)](https://api.sylvain.pro)
   [![Langue](https://img.shields.io/badge/Langue%20:-FR-3857ab?labelColor=23272A)](https://github.com/20syldev/api#readme)
 </div>
