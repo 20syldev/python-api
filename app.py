@@ -116,8 +116,9 @@ def color(lang):
 
 # Génération de domaine
 def domain(lang):
-    noms = ['example', 'site', 'test', 'demo']
-    extensions = ['.com', '.fr', '.eu', '.dev', '.net', '.org', '.io']
+    noms = ['example', 'site', 'test', 'demo', 'page', 'web']
+    extensions = ['.com', '.fr', '.eu', '.dev', '.net', '.org', '.io', '.tech', '.biz', '.info', '.co', '.app']
+    
     domain = random.choice(noms) + random.choice(extensions)
     return jsonify({'domain': domain, 'random_name': random.choice(noms), 'random_tld': random.choice(extensions)})
 
