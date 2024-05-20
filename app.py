@@ -37,7 +37,7 @@ def lang(lang=None):
 def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
 
-####################### REDIRECTION VERS LANGUE #########################
+################# REDIRECTION VERS ENDPOINTS & LANGUE ###################
 
 # Détection de la langue et de l'endpoint demandé
 @app.route('/<lang>/<endpoint>', methods=['GET'])
