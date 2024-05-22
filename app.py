@@ -1,10 +1,10 @@
 import base64, firebase_admin, io, qrcode, random, requests, string, uuid
-from flask import Flask, render_template, send_from_directory, send_file, request, jsonify
-from flask_cors import CORS
 from datetime import datetime
-from PIL import Image, ImageDraw, ImageFont
 from dotenv import load_dotenv
 from firebase_admin import credentials, firestore, initialize_app
+from flask import Flask, render_template, send_from_directory, send_file, request, jsonify
+from flask_cors import CORS
+from PIL import Image, ImageDraw, ImageFont
 
 ############################## PRINCIPAL ##############################
 
@@ -60,7 +60,7 @@ def redirect_page(lang, endpoint):
     elif endpoint == 'personal':
         return personal(lang)
     elif endpoint == 'qrcode':
-        return qrcode(lang)
+        return qr_code(lang)
     elif endpoint == 'token':
         return token(lang)
     elif endpoint == 'versions':
@@ -176,7 +176,7 @@ def personal(lang):
     return jsonify({'card': carte, 'cvc': cvc, 'email': emails[i], 'expiration': date, 'job': random.choice(job), 'localisation': pays[i], 'name': noms[i], 'tel': tel[i]})
 
 # Génération de QR code
-def qrcode(lang):
+def qr_code(lang):
     url = request.args.get('url', '')
     if not url:
         if lang == 'en':
