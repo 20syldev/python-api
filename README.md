@@ -30,7 +30,7 @@ Exemple sur **[api.sylvain.pro/fr/token](https://api.sylvain.pro/fr/token)**, qu
 ```py
 import requests
 
-print(requests.get("https://api.sylvain.pro/fr/token").json()["key"])
+print(requests.get('https://api.sylvain.pro/fr/token').json()['key'])
 ```
 
 ### JavaScript
