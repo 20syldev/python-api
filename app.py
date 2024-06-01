@@ -71,9 +71,9 @@ def redirect_page(lang, endpoint):
         if lang == 'en':
             return jsonify({'error': 'Endpoint not found'})
         elif lang == 'fr':
-            return jsonify({'erreur': 'Endpoint non trouvé'})
+            return jsonify({'erreur': 'Endpoint introuvable'})
         # Erreur si endpoint non trouvé
-        return jsonify({'erreur': 'Endpoint non trouvé'})
+        return jsonify({'erreur': 'Endpoint introuvable'})
 
 ####################### FONCTIONS DES ENDPOINTS #########################
 
