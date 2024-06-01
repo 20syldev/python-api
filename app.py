@@ -25,10 +25,10 @@ def index():
 # Route pour les langues
 @app.route('/<lang>')
 def lang(lang=None):
-    if lang == 'fr':
-        return render_template('fr/index.html')
-    elif lang == 'en':
+    if lang == 'en':
         return render_template('en/index.html')
+    elif lang == 'fr':
+        return render_template('fr/index.html')
     # Erreur si aucune langue n'est spécifiée
     return jsonify({'error': 'Language not found, please specify an existing language in the URL (/fr or /en)'})
 
@@ -68,7 +68,12 @@ def redirect_page(lang, endpoint):
     elif endpoint == 'username':
         return username(lang)
     else:
-        return jsonify({'error': 'Endpoint not found'})
+        if lang == 'en':
+            return jsonify({'error': 'Endpoint not found'})
+        elif lang == 'fr':
+            return jsonify({'erreur': 'Endpoint non trouvé'})
+        # Erreur si endpoint non trouvé
+        return jsonify({'erreur': 'Endpoint non trouvé'})
 
 ####################### FONCTIONS DES ENDPOINTS #########################
 
