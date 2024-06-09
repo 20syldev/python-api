@@ -36,6 +36,25 @@
 
     <!-- Show all endpoints -->
     <pre>
+        <b><span style="color: #f1ce8c;">GET <a href="/en/algorithms?tool=anagram&value=arbre&value2=barre">/algorithms</a>?tool=<span style="color: #97dcee;">{Algorithm}</span>&value=<span style="color: #f794f7;">{Value}</span><span id="value2"></span></span></b>
+        <i>Returns an answer based on the algorithm used and the parameter values.</i>
+
+        Utilisation :
+            - <b><span style="color: #97dcee;">{Algorithm}</span></b> can contain the following options:
+                - "<a href="/en/algorithms?tool=anagram&value=arbre&value2=barre">anagram</a>" : Returns a boolean with the condition that "value" and "value2" are anagrams.
+                - "<a href="/en/algorithms?tool=factorial&value=10">factorial</a>" : Returns the factorial of the number entered as parameter.
+                - "<a href="/en/algorithms?tool=fibonacci&value=10">fibonacci</a>" : Returns a list containing the first x terms of the Fibonacci sequence.
+                - "<a href="/en/algorithms?tool=palindrome&value=rever">palindrome</a>" : Returns a boolean with the condition that "value" is a palindrome.
+                - "<a href="/en/algorithms?tool=reverse&value=esrevni">reverse</a>" : Returns the value entered as a parameter, in reverse.
+            - <b><span style="color: #f794f7;">{Valeur}</span></b> can be words or numbers, depending on the algorithm used.
+            - <b><span style="color: #9c8cf8;" onmouseover="document.getElementById('value2').innerHTML = '&value2=<span style=\'color: #9c8cf8;\'>{Valeur2}</span>';" onmouseout ="document.getElementById('value2').innerHTML = '';">{Valeur2}</span></b> can be any words or numbers only in the "<a href="/en/algorithms?tool=anagram&value=arbre&value2=barre">anagram</a>" algorithm.
+            - An empty or invalid option will return an error.
+
+        Key:
+            - "answer" : displays the answer.
+
+
+
         <b><span style="color: #f1ce8c;">GET <a href="/en/captcha?text=api.sylvain.pro">/captcha</a>?text=<span style="color: #8cc0fc;">{Text}</span></span></b>
         <i>Generates a captcha image with the text you enter as a parameter.</i>
 
