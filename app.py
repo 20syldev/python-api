@@ -1,4 +1,4 @@
-import base64, firebase_admin, io, qrcode, random, requests, string, uuid
+import base64, firebase_admin, io, math, qrcode, random, requests, string, uuid
 from datetime import datetime
 from dotenv import load_dotenv
 from firebase_admin import credentials, firestore, initialize_app
@@ -47,7 +47,9 @@ def redirect_page(lang, endpoint):
         return jsonify({'error': 'Please specify language in the URL (/fr or /en)'})
     
     # Fonction exécutée en fonction du service demandé
-    if endpoint == 'captcha':
+    if endpoint == 'algorithms':
+        return algorithms(lang)
+    elif endpoint == 'captcha':
         return captcha(lang)
     elif endpoint == 'color':
         return color(lang)
@@ -74,6 +76,82 @@ def redirect_page(lang, endpoint):
             return jsonify({'erreur': 'Endpoint introuvable'})
 
 ####################### FONCTIONS DES ENDPOINTS #########################
+
+# Fonctions utiles
+def algorithms(lang):
+    tool = request.args.get('tool', '')
+    value = request.args.get('value', '')
+
+    if tool not in ['anagram', 'factorial', 'fibonacci', 'palindrome', 'reverse']:
+        if lang == 'en':
+            return jsonify({'error': 'Please provide a valid algorithm (?tool={Algorithm})'})
+        elif lang == 'fr':
+            return jsonify({'erreur': 'Veuillez fournir un algorithme valide (?tool={Algorithme})'})
+        else:
+            return jsonify({'erreur': 'Veuillez fournir un algorithme valide (?tool={Algorithme})'})
+
+    elif not value:
+        if lang == 'en':
+            return jsonify({'error': 'Please provide a valid value (&value={Value})'})
+        elif lang == 'fr':
+            return jsonify({'erreur': 'Veuillez fournir une valeur valide (&value={Valeur})'})
+        else:
+            return jsonify({'erreur': 'Veuillez fournir une valeur valide (&value={Valeur})'})
+
+    if tool == 'anagram':
+        value2 = request.args.get('value2', '')
+
+        if not value2:
+            if lang == 'en':
+                return jsonify({'error': 'Please provide a second valid input (&value2={Input})'})
+            elif lang == 'fr':
+                return jsonify({'erreur': 'Veuillez fournir une seconde valeur valide (&value2={Valeur})'})
+            else:
+                return jsonify({'erreur': 'Veuillez fournir une seconde valeur valide (&value2={Valeur})'})
+
+        return jsonify({'answer': sorted(value) == sorted(value2)})
+    
+    elif tool == 'factorial':
+        value = int(value)
+        try:
+            if value >= 1500:
+                value = 1500
+            answer = math.factorial(value)
+
+        except:
+            if lang == 'en':
+                return jsonify({'error': 'Please provide a valid input (&value={Number})'})
+            elif lang == 'fr':
+                return jsonify({'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})'})
+            else:
+                return jsonify({'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})'})
+
+        return jsonify({'answer': answer})
+
+    elif tool == 'fibonacci':
+        fib = [0, 1]
+        value = int(value)
+        try:
+            if value >= 10000:
+                value = 10000
+            for i in range(2, value):
+                fib.append(fib[-1] + fib[-2])
+
+        except:
+            if lang == 'en':
+                return jsonify({'error': 'Please provide a valid input (&value={Number})'})
+            elif lang == 'fr':
+                return jsonify({'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})'})
+            else:
+                return jsonify({'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})'})
+
+        return jsonify({'answer': fib[:value]})
+    
+    elif tool == 'palindrome':
+        return jsonify({'answer': value == value[::-1]})
+    
+    elif tool == 'reverse':
+        return jsonify({'answer': value[::-1]})
 
 # Génération de captcha
 def captcha(lang):
