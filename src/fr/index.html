@@ -36,6 +36,25 @@
     
     <!-- Affichage de tous les endpoints -->
     <pre>
+        <b><span style="color: #f1ce8c;">GET <a href="/fr/algorithms?tool=anagram&value=arbre&value2=barre">/algorithms</a>?tool=<span style="color: #97dcee;">{Algorithme}</span>&value=<span style="color: #f794f7;">{Valeur}</span><span id="value2"></span></span></b>
+        <i>Renvoie une réponse en fonction de l'algorithme utilisé et des valeurs en paramètres.</i>
+
+        Utilisation :
+            - <b><span style="color: #97dcee;">{Algorithme}</span></b> peut contenir les options suivantes :
+                - "<a href="/fr/algorithms?tool=anagram&value=arbre&value2=barre">anagram</a>" : Renvoie un booléen avec la condition que "value" et "value2" sont des anagrammes.
+                - "<a href="/fr/algorithms?tool=factorial&value=10">factorial</a>" : Renvoie la factorielle du nombre entré en paramètre.
+                - "<a href="/fr/algorithms?tool=fibonacci&value=10">fibonacci</a>" : Renvoie une liste contenant les x premiers termes de la suite de Fibonacci.
+                - "<a href="/fr/algorithms?tool=palindrome&value=rever">palindrome</a>" : Renvoie un booléen avec la condition que "value" est un palindrome.
+                - "<a href="/fr/algorithms?tool=reverse&value=esrevni">reverse</a>" : Renvoie la valeur entrée en paramètre, à l'envers.
+            - <b><span style="color: #f794f7;">{Valeur}</span></b> peut prendre en compte des mots ou des nombres en fonction de l'algorithme utilisé.
+            - <b><span style="color: #9c8cf8;" onmouseover="document.getElementById('value2').innerHTML = '&value2=<span style=\'color: #9c8cf8;\'>{Valeur2}</span>';" onmouseout ="document.getElementById('value2').innerHTML = '';">{Valeur2}</span></b> peut prendre en compte des mots ou des nombres seulement dans l'algorithme "<a href="/fr/algorithms?tool=anagram&value=arbre&value2=barre">anagram</a>".
+            - Une option vide ou invalide renverra une erreur.
+
+        Clé :
+            - "answer" : affiche la réponse attendue.
+
+
+
         <b><span style="color: #f1ce8c;">GET <a href="/fr/captcha?text=api.sylvain.pro">/captcha</a>?text=<span style="color: #8cc0fc;">{Texte}</span></span></b>
         <i>Génère une image de captcha avec le texte que vous entrez en paramètre.</i>
 
