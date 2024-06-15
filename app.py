@@ -1,4 +1,4 @@
-import base64, firebase_admin, io, math, qrcode, random, requests, string, uuid
+import base64, firebase_admin, io, json, math, qrcode, random, requests, string, uuid
 from datetime import datetime
 from dotenv import load_dotenv
 from firebase_admin import credentials, firestore, initialize_app
@@ -20,7 +20,8 @@ firebase_app = None
 # Page d'accueil
 @app.route('/')
 def index():
-    return render_template('index.html')
+    data = {'en': 'English', 'fr': 'Francais'}
+    return app.response_class(response=json.dumps(data, indent=2), status=200, mimetype='application/json')
 
 # Route pour les langues
 @app.route('/<lang>')
