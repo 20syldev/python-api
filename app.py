@@ -20,7 +20,7 @@ firebase_app = None
 # Page d'accueil
 @app.route('/')
 def index():
-    data = {'en': 'English', 'fr': 'Francais'}
+    data = {'en': 'https://api.sylvain.pro/en', 'fr': 'https://api.sylvain.pro/fr'}
     return app.response_class(response=json.dumps(data, indent=2), status=200, mimetype='application/json')
 
 # Route pour les langues
