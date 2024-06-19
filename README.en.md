@@ -2,7 +2,7 @@
   <a href="https://api.sylvain.pro/en"><img src="https://github.com/20syldev/api/blob/main/src/api.png" alt="Logo" width="25%" height="auto"></a>
 
 # Public API - Sylvain
-  [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v1.4.95-ee6464?logo=api.sylvain.pro&labelColor=23272A)](https://github.com/20syldev/api/releases/latest)
+  [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v1.5.0-ee6464?logo=api.sylvain.pro&labelColor=23272A)](https://github.com/20syldev/api/releases/latest)
   [![Status](https://img.shields.io/badge/Status%20:-Online-42b85f?labelColor=23272A)](https://api.sylvain.pro/en)
   [![Lang](https://img.shields.io/badge/Lang%20:-EN-3857ab?labelColor=23272A)](https://github.com/20syldev/api#readme)
 </div>
@@ -13,7 +13,7 @@
 > *Cliquez [ici](https://github.com/20syldev/api#readme) pour voir la version française, ou cliquez sur le bouton ci-dessus.*
 
 ## About the API
-This is my personal API, available on the [sylvain.pro](https://api.sylvain.pro/en) domain, in French and English. 
+This is my personal API, available on the [api.sylvain.pro](https://api.sylvain.pro) domain, in French and English. 
 You can use it **without limitations**, as all **endpoints** are public!
 > *The API may take a few seconds to load, but once it's done, everything works very quickly and requests are executed instantly.*
 
