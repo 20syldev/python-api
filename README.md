@@ -1,9 +1,9 @@
 <div align="center">
-  <a href="https://api.sylvain.pro"><img src="https://github.com/20syldev/api/blob/main/src/api.png" alt="Logo" width="25%" height="auto"></a>
+  <a href="https://api.sylvain.pro/fr"><img src="https://github.com/20syldev/api/blob/main/src/api.png" alt="Logo" width="25%" height="auto"></a>
 
 # API Publique - Sylvain
-  [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v1.4.95-ee6464?logo=api.sylvain.pro&labelColor=23272A)](https://github.com/20syldev/api/releases/latest)
-  [![Statut](https://img.shields.io/badge/Statut%20:-En%20ligne-42b85f?labelColor=23272A)](https://api.sylvain.pro)
+  [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v1.5.0-ee6464?logo=api.sylvain.pro&labelColor=23272A)](https://github.com/20syldev/api/releases/latest)
+  [![Statut](https://img.shields.io/badge/Statut%20:-En%20ligne-42b85f?labelColor=23272A)](https://api.sylvain.pro/fr)
   [![Langue](https://img.shields.io/badge/Langue%20:-FR-3857ab?labelColor=23272A)](https://github.com/20syldev/api#readme)
 </div>
 
@@ -13,7 +13,7 @@
 > *Click [here](https://github.com/20syldev/api/blob/main/README.en.md) to view the english version, or click on the button above.*
 
 ## À propos de l'API
-Voici mon API personnelle, disponible sur le domaine [sylvain.pro](https://api.sylvain.pro), en français et en anglais. 
+Voici mon API personnelle, disponible sur le domaine [api.sylvain.pro](https://api.sylvain.pro), en français et en anglais. 
 Vous pouvez l'utiliser **sans limitations**, car tous les **endpoints** sont publics !
 > *L'API peut prendre quelques secondes à charger, mais une fois fait, tout fonctionne très rapidement et les appels en console sont instantanés.*
 
