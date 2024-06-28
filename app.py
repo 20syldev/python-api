@@ -339,6 +339,7 @@ def versions(lang):
             'coop_status': requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' '),
             'database': requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' '),
             'doc_coopbot': requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' '),
+            'gemhost': requests.get('https://api.github.com/repos/20syldev/gemhost/releases').json()[0]['tag_name'].replace('-', ' '),
             'gitsite': requests.get('https://api.github.com/repos/20syldev/gitsite/releases').json()[0]['tag_name'].replace('-', ' '),
             'nitrogen': requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' '),
             'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' ')
@@ -356,6 +357,7 @@ def versions(lang):
     coop_status = version.get('coop_status', '')
     database = version.get('database', '')
     doc_coopbot = version.get('doc_coopbot', '')
+    gemhost = version.get('gemhost', '')
     gitsite = version.get('gitsite', '')
     nitrogen = version.get('nitrogen', '')
     portfolio = version.get('portfolio', '')
