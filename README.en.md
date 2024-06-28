@@ -1,7 +1,7 @@
 <div align="center">
   <a href="https://api.sylvain.pro/en"><img src="https://github.com/20syldev/api/blob/main/src/api.png" alt="Logo" width="25%" height="auto"></a>
 
-# Public API - Sylvain
+  # Public API - Sylvain
   [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v1.5.0-ee6464?logo=api.sylvain.pro&labelColor=23272A)](https://github.com/20syldev/api/releases/latest)
   [![Status](https://img.shields.io/badge/Status%20:-Online-42b85f?labelColor=23272A)](https://api.sylvain.pro/en)
   [![Lang](https://img.shields.io/badge/Lang%20:-EN-3857ab?labelColor=23272A)](https://github.com/20syldev/api#readme)
