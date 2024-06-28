@@ -339,7 +339,7 @@ def versions(lang):
             'coop_status': requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' '),
             'database': requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' '),
             'doc_coopbot': requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' '),
-            'gemhost': requests.get('https://api.github.com/repos/20syldev/gemhost/releases').json()[0]['tag_name'].replace('-', ' '),
+            'gemsync': requests.get('https://api.github.com/repos/20syldev/gemsync/releases').json()[0]['tag_name'].replace('-', ' '),
             'gitsite': requests.get('https://api.github.com/repos/20syldev/gitsite/releases').json()[0]['tag_name'].replace('-', ' '),
             'nitrogen': requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' '),
             'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' ')
@@ -357,12 +357,12 @@ def versions(lang):
     coop_status = version.get('coop_status', '')
     database = version.get('database', '')
     doc_coopbot = version.get('doc_coopbot', '')
-    gemhost = version.get('gemhost', '')
+    gemsync = version.get('gemsync', '')
     gitsite = version.get('gitsite', '')
     nitrogen = version.get('nitrogen', '')
     portfolio = version.get('portfolio', '')
 
-    return app.response_class(response=json.dumps({'api': api, 'coop_api': coop_api, 'coop_status': coop_status, 'database': database, 'doc_coopbot': doc_coopbot, 'gemhost': gemhost, 'gitsite': gitsite, 'nitrogen': nitrogen, 'portfolio': portfolio}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({'api': api, 'coop_api': coop_api, 'coop_status': coop_status, 'database': database, 'doc_coopbot': doc_coopbot, 'gemsync': gemsync, 'gitsite': gitsite, 'nitrogen': nitrogen, 'portfolio': portfolio}, indent=2), status=200, mimetype='application/json')
 
 # Génération de nom d'utilisateur
 def username(lang):
