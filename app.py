@@ -362,7 +362,7 @@ def versions(lang):
     nitrogen = version.get('nitrogen', '')
     portfolio = version.get('portfolio', '')
 
-    return app.response_class(response=json.dumps({'api': api, 'coop_api': coop_api, 'coop_status': coop_status, 'database': database, 'doc_coopbot': doc_coopbot, 'gitsite': gitsite, 'nitrogen': nitrogen, 'portfolio': portfolio}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({'api': api, 'coop_api': coop_api, 'coop_status': coop_status, 'database': database, 'doc_coopbot': doc_coopbot, 'gemhost': gemhost, 'gitsite': gitsite, 'nitrogen': nitrogen, 'portfolio': portfolio}, indent=2), status=200, mimetype='application/json')
 
 # Génération de nom d'utilisateur
 def username(lang):
