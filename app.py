@@ -218,7 +218,7 @@ def infos(lang):
         firebase_app = initialize_app(firebaseConfig)
         firebase_init = True
 
-    info = firestore.client().collection('infos').document('api').get().to_dict()
+    info = firestore.client().collection('api').document('infos').get().to_dict()
     endpoints = info.get('endpoints', '')
 
     return app.response_class(response=json.dumps({'endpoints': endpoints}, indent=2), status=200, mimetype='application/json')
@@ -331,26 +331,8 @@ def versions(lang):
         })
         firebase_app = initialize_app(firebaseConfig)
         firebase_init = True
-        
-    try:
-        data = {
-            'api': requests.get('https://api.github.com/repos/20syldev/api/releases').json()[0]['tag_name'].replace('-', ' '),
-            'coop_api': requests.get('https://api.github.com/repos/20syldev/coop-api/releases').json()[0]['tag_name'].replace('-', ' '),
-            'coop_status': requests.get('https://api.github.com/repos/20syldev/coop-status/releases').json()[0]['tag_name'].replace('-', ' '),
-            'database': requests.get('https://api.github.com/repos/20syldev/database/releases').json()[0]['tag_name'].replace('-', ' '),
-            'doc_coopbot': requests.get('https://api.github.com/repos/20syldev/doc-coopbot/releases').json()[0]['tag_name'].replace('-', ' '),
-            'gemsync': requests.get('https://api.github.com/repos/20syldev/gemsync/releases').json()[0]['tag_name'].replace('-', ' '),
-            'gitsite': requests.get('https://api.github.com/repos/20syldev/gitsite/releases').json()[0]['tag_name'].replace('-', ' '),
-            'nitrogen': requests.get('https://api.github.com/repos/20syldev/nitrogen/releases').json()[0]['tag_name'].replace('-', ' '),
-            'portfolio': requests.get('https://api.github.com/repos/20syldev/portfolio/releases').json()[0]['tag_name'].replace('-', ' ')
-        }
-        version_data = firestore.client().collection('versions').document('github')
-        version_data.set(data)
-
-    except:
-        pass
-
-    version = firestore.client().collection('versions').document('github').get().to_dict()
+    
+    version = firestore.client().collection('api').document('projets').get().to_dict()
 
     api = version.get('api', '')
     coop_api = version.get('coop_api', '')
