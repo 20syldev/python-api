@@ -22,7 +22,7 @@ firebase_app = None
 def index(): return app.response_class(response=json.dumps({ 'en': 'https://api.sylvain.pro/en', 'fr': 'https://api.sylvain.pro/fr' }, indent=2), status=200, mimetype='application/json')
 
 # Route pour les langues
-@app.route('/<lang>')
+@app.route('/<lang>/', methods=['GET'])
 def lang(lang=None):
     if lang == 'en':
         return render_template('en/index.html')
@@ -31,14 +31,14 @@ def lang(lang=None):
     return app.response_class(response=json.dumps({ 'error': 'Language not found, please specify an existing language in the URL (/fr or /en)' }, indent=2), status=200, mimetype='application/json')
 
 # Redirection du fichier
-@app.route('/<path:filename>')
+@app.route('/<path:filename>/', methods=['GET'])
 def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
 
 ################# REDIRECTION VERS ENDPOINTS & LANGUE ###################
 
 # Détection de la langue et de l'endpoint demandé
-@app.route('/<lang>/<endpoint>', methods=['GET'])
+@app.route('/<lang>/<endpoint>/', methods=['GET'])
 def redirect_page(lang, endpoint):
     if lang not in ['fr', 'en']:
         return app.response_class(response=json.dumps({ 'error': 'Please specify language in the URL (/fr or /en)' }, indent=2), status=200, mimetype='application/json')
