@@ -1,8 +1,8 @@
-import base64, firebase_admin, io, json, math, qrcode, random, requests, string, uuid
+import base64, firebase_admin, io, json, math, os, qrcode, random, requests, string, uuid
 from datetime import datetime
 from dotenv import load_dotenv
 from firebase_admin import credentials, firestore, initialize_app
-from flask import Flask, render_template, send_from_directory, send_file, request
+from flask import Flask, render_template, request, send_file, send_from_directory
 from flask_cors import CORS
 from PIL import Image, ImageDraw, ImageFont
 
