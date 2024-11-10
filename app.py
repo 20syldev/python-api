@@ -19,8 +19,7 @@ firebase_app = None
 
 # Page d'accueil
 @app.route('/')
-def index():
-    return app.response_class(response=json.dumps({'en': 'https://api.sylvain.pro/en', 'fr': 'https://api.sylvain.pro/fr'}, indent=2), status=200, mimetype='application/json')
+def index(): return app.response_class(response=json.dumps({ 'en': 'https://api.sylvain.pro/en', 'fr': 'https://api.sylvain.pro/fr' }, indent=2), status=200, mimetype='application/json')
 
 # Route pour les langues
 @app.route('/<lang>')
@@ -29,8 +28,7 @@ def lang(lang=None):
         return render_template('en/index.html')
     elif lang == 'fr':
         return render_template('fr/index.html')
-    # Erreur si aucune langue n'est spécifiée
-    return app.response_class(response=json.dumps({'error': 'Language not found, please specify an existing language in the URL (/fr or /en)'}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({ 'error': 'Language not found, please specify an existing language in the URL (/fr or /en)' }, indent=2), status=200, mimetype='application/json')
 
 # Redirection du fichier
 @app.route('/<path:filename>')
@@ -42,11 +40,8 @@ def serve_static(filename):
 # Détection de la langue et de l'endpoint demandé
 @app.route('/<lang>/<endpoint>', methods=['GET'])
 def redirect_page(lang, endpoint):
-    # Si aucune langue n'est spécifiée, renvoyer un message d'erreur
     if lang not in ['fr', 'en']:
-        return app.response_class(response=json.dumps({'error': 'Please specify language in the URL (/fr or /en)'}, indent=2), status=200, mimetype='application/json')
-    
-    # Fonction exécutée en fonction du service demandé
+        return app.response_class(response=json.dumps({ 'error': 'Please specify language in the URL (/fr or /en)' }, indent=2), status=200, mimetype='application/json')
     if endpoint == 'algorithms':
         return algorithms(lang)
     elif endpoint == 'captcha':
@@ -70,10 +65,9 @@ def redirect_page(lang, endpoint):
     elif endpoint == 'username':
         return username(lang)
     else:
-        if lang == 'en':
-            return app.response_class(response=json.dumps({'error': 'Endpoint not found'}, indent=2), status=200, mimetype='application/json')
-        elif lang == 'fr':
-            return app.response_class(response=json.dumps({'erreur': 'Endpoint introuvable'}, indent=2), status=200, mimetype='application/json')
+        if lang == 'en': return app.response_class(response=json.dumps({ 'error': 'Endpoint not found' }, indent=2), status=200, mimetype='application/json')
+        elif lang == 'fr': return app.response_class(response=json.dumps({ 'erreur': 'Endpoint introuvable' }, indent=2), status=200, mimetype='application/json')
+
 ####################### FONCTION FIREBASE #########################
 
 def get_data(collection, document):
@@ -102,32 +96,32 @@ def algorithms(lang):
 
     if tool not in ['anagram', 'factorial', 'fibonacci', 'palindrome', 'reverse']:
         if lang == 'en':
-            return app.response_class(response=json.dumps({'error': 'Please provide a valid algorithm (?tool={Algorithm})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'error': 'Please provide a valid algorithm (?tool={Algorithm})' }, indent=2), status=200, mimetype='application/json')
         elif lang == 'fr':
-            return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir un algorithme valide (?tool={Algorithme})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir un algorithme valide (?tool={Algorithme})' }, indent=2), status=200, mimetype='application/json')
         else:
-            return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir un algorithme valide (?tool={Algorithme})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir un algorithme valide (?tool={Algorithme})' }, indent=2), status=200, mimetype='application/json')
 
     elif not value:
         if lang == 'en':
-            return app.response_class(response=json.dumps({'error': 'Please provide a valid value (&value={Value})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'error': 'Please provide a valid value (&value={Value})' }, indent=2), status=200, mimetype='application/json')
         elif lang == 'fr':
-            return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une valeur valide (&value={Valeur})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une valeur valide (&value={Valeur})' }, indent=2), status=200, mimetype='application/json')
         else:
-            return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une valeur valide (&value={Valeur})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une valeur valide (&value={Valeur})' }, indent=2), status=200, mimetype='application/json')
 
     if tool == 'anagram':
         value2 = request.args.get('value2', '')
 
         if not value2:
             if lang == 'en':
-                return app.response_class(response=json.dumps({'error': 'Please provide a second valid input (&value2={Input})'}, indent=2), status=200, mimetype='application/json')
+                return app.response_class(response=json.dumps({ 'error': 'Please provide a second valid input (&value2={Input})' }, indent=2), status=200, mimetype='application/json')
             elif lang == 'fr':
-                return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une seconde valeur valide (&value2={Valeur})'}, indent=2), status=200, mimetype='application/json')
+                return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une seconde valeur valide (&value2={Valeur})' }, indent=2), status=200, mimetype='application/json')
             else:
-                return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une seconde valeur valide (&value2={Valeur})'}, indent=2), status=200, mimetype='application/json')
+                return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une seconde valeur valide (&value2={Valeur})' }, indent=2), status=200, mimetype='application/json')
 
-        return app.response_class(response=json.dumps({'answer': sorted(value) == sorted(value2)}, indent=2), status=200, mimetype='application/json')
+        return app.response_class(response=json.dumps({ 'answer': sorted(value) == sorted(value2) }, indent=2), status=200, mimetype='application/json')
     
     elif tool == 'factorial':
         value = int(value)
@@ -138,13 +132,13 @@ def algorithms(lang):
 
         except:
             if lang == 'en':
-                return app.response_class(response=json.dumps({'error': 'Please provide a valid input (&value={Number})'}, indent=2), status=200, mimetype='application/json')
+                return app.response_class(response=json.dumps({ 'error': 'Please provide a valid input (&value={Number})' }, indent=2), status=200, mimetype='application/json')
             elif lang == 'fr':
-                return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})'}, indent=2), status=200, mimetype='application/json')
+                return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})' }, indent=2), status=200, mimetype='application/json')
             else:
-                return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})'}, indent=2), status=200, mimetype='application/json')
+                return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})' }, indent=2), status=200, mimetype='application/json')
 
-        return app.response_class(response=json.dumps({'answer': answer}, indent=2), status=200, mimetype='application/json')
+        return app.response_class(response=json.dumps({ 'answer': answer}, indent=2), status=200, mimetype='application/json')
 
     elif tool == 'fibonacci':
         fib = [0, 1]
@@ -157,19 +151,19 @@ def algorithms(lang):
 
         except:
             if lang == 'en':
-                return app.response_class(response=json.dumps({'error': 'Please provide a valid input (&value={Number})'}, indent=2), status=200, mimetype='application/json')
+                return app.response_class(response=json.dumps({ 'error': 'Please provide a valid input (&value={Number})' }, indent=2), status=200, mimetype='application/json')
             elif lang == 'fr':
-                return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})'}, indent=2), status=200, mimetype='application/json')
+                return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})' }, indent=2), status=200, mimetype='application/json')
             else:
-                return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})'}, indent=2), status=200, mimetype='application/json')
+                return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une valeur valide (&value={Nombre})' }, indent=2), status=200, mimetype='application/json')
 
-        return app.response_class(response=json.dumps({'answer': fib[:value]}, indent=2), status=200, mimetype='application/json')
+        return app.response_class(response=json.dumps({ 'answer': fib[:value]}, indent=2), status=200, mimetype='application/json')
     
     elif tool == 'palindrome':
-        return app.response_class(response=json.dumps({'answer': value == value[::-1]}, indent=2), status=200, mimetype='application/json')
+        return app.response_class(response=json.dumps({ 'answer': value == value[::-1]}, indent=2), status=200, mimetype='application/json')
     
     elif tool == 'reverse':
-        return app.response_class(response=json.dumps({'answer': value[::-1]}, indent=2), status=200, mimetype='application/json')
+        return app.response_class(response=json.dumps({ 'answer': value[::-1]}, indent=2), status=200, mimetype='application/json')
 
 # Génération de captcha
 def captcha(lang):
@@ -177,11 +171,11 @@ def captcha(lang):
 
     if not captcha:
         if lang == 'en':
-            return app.response_class(response=json.dumps({'error': 'Please provide a valid argument (?text={Text})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'error': 'Please provide a valid argument (?text={Text})' }, indent=2), status=200, mimetype='application/json')
         elif lang == 'fr':
-            return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir un argument valide (?text={Texte})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir un argument valide (?text={Texte})' }, indent=2), status=200, mimetype='application/json')
         else:
-            return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir un argument valide (?text={Texte})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir un argument valide (?text={Texte})' }, indent=2), status=200, mimetype='application/json')
 
     size = 60
     font = ImageFont.truetype("src/font.otf", size)
@@ -211,7 +205,7 @@ def captcha(lang):
 # Génération de couleurs
 def color(lang):
     r, g, b = [random.randint(0, 255) for _ in range(3)]
-    return app.response_class(response=json.dumps({'hex': '#{0:02x}{1:02x}{2:02x}'.format(r, g, b), 'rgb': f'rgb({r}, {g}, {b})'}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({ 'hex': '#{0:02x}{1:02x}{2:02x}'.format(r, g, b), 'rgb': f'rgb({r}, {g}, {b})' }, indent=2), status=200, mimetype='application/json')
 
 # Génération de domaine
 def domain(lang):
@@ -219,14 +213,13 @@ def domain(lang):
     extensions = ['.com', '.fr', '.eu', '.dev', '.net', '.org', '.io', '.tech', '.biz', '.info', '.co', '.app']
     
     domain = random.choice(noms) + random.choice(extensions)
-    return app.response_class(response=json.dumps({'domain': domain, 'random_name': random.choice(noms), 'random_tld': random.choice(extensions)}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({ 'domain': domain, 'random_name': random.choice(noms), 'random_tld': random.choice(extensions) }, indent=2), status=200, mimetype='application/json')
 
 # Affichage d'informations sur l'API
 def infos(lang):
     info = get_data('api', 'infos')
     endpoints = info.get('endpoints', '')
-
-    return app.response_class(response=json.dumps({'endpoints': endpoints}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({ 'endpoints': endpoints}, indent=2), status=200, mimetype='application/json')
 
 # Génération de texte Lorem
 def lorem(lang):
@@ -237,7 +230,7 @@ def lorem(lang):
 
     sentences = text.split('. ')
     output = '. '.join(sentences[:int(argument)])
-    return app.response_class(response=json.dumps({'text': output + '.'}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({ 'text': output + '.' }, indent=2), status=200, mimetype='application/json')
 
 # Génération d'informations personnelles
 def personal(lang):
@@ -259,18 +252,18 @@ def personal(lang):
     else:
         date = f'{mois}/{annee}'
         
-    return app.response_class(response=json.dumps({'card': carte, 'cvc': cvc, 'email': emails[i], 'expiration': date, 'job': random.choice(job), 'localisation': pays[i], 'name': noms[i], 'tel': tel[i]}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({ 'card': carte, 'cvc': cvc, 'email': emails[i], 'expiration': date, 'job': random.choice(job), 'localisation': pays[i], 'name': noms[i], 'tel': tel[i]}, indent=2), status=200, mimetype='application/json')
 
 # Génération de QR code
 def qr_code(lang):
     url = request.args.get('url', '')
     if not url:
         if lang == 'en':
-            return app.response_class(response=json.dumps({'error': 'Please provide a valid url (?url={URL})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'error': 'Please provide a valid url (?url={URL})' }, indent=2), status=200, mimetype='application/json')
         elif lang == 'fr':
-            return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une URL valide (?url={URL})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une URL valide (?url={URL})' }, indent=2), status=200, mimetype='application/json')
         else:
-            return app.response_class(response=json.dumps({'erreur': 'Veuillez fournir une URL valide (?url={URL})'}, indent=2), status=200, mimetype='application/json')
+            return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir une URL valide (?url={URL})' }, indent=2), status=200, mimetype='application/json')
 
     qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=18, border=3)
     qr.add_data(url)
@@ -320,7 +313,7 @@ def token(lang):
     else:
         token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(longueur))
     
-    return app.response_class(response=json.dumps({'key': token}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({ 'key': token}, indent=2), status=200, mimetype='application/json')
 
 # Affichage des versions de mes projets
 def versions(lang):
@@ -337,7 +330,7 @@ def versions(lang):
     wrkit = version.get('wrkit', '')
     zpki = version.get('zpki', '')
 
-    return app.response_class(response=json.dumps({'api': api, 'coop_api': coop_api, 'coop_status': coop_status, 'database': database, 'doc_coopbot': doc_coopbot, 'gemsync': gemsync, 'gitsite': gitsite, 'nitrogen': nitrogen, 'portfolio': portfolio, 'wrkit': wrkit, 'zpki': zpki}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({ 'api': api, 'coop_api': coop_api, 'coop_status': coop_status, 'database': database, 'doc_coopbot': doc_coopbot, 'gemsync': gemsync, 'gitsite': gitsite, 'nitrogen': nitrogen, 'portfolio': portfolio, 'wrkit': wrkit, 'zpki': zpki }, indent=2), status=200, mimetype='application/json')
 
 # Génération de nom d'utilisateur
 def username(lang):
@@ -364,7 +357,7 @@ def username(lang):
     elif choix == 'pro_ani_num':
         username = random.choice(job) + random.choice(ani) + nombre
     
-    return app.response_class(response=json.dumps({'adjective': adj, 'animal': ani, 'job': job, 'number': nombre, 'username': username}, indent=2), status=200, mimetype='application/json')
+    return app.response_class(response=json.dumps({ 'adjective': adj, 'animal': ani, 'job': job, 'number': nombre, 'username': username }, indent=2), status=200, mimetype='application/json')
 
 ################################# HOST ###################################
 
