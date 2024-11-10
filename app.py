@@ -74,6 +74,24 @@ def redirect_page(lang, endpoint):
             return app.response_class(response=json.dumps({'error': 'Endpoint not found'}, indent=2), status=200, mimetype='application/json')
         elif lang == 'fr':
             return app.response_class(response=json.dumps({'erreur': 'Endpoint introuvable'}, indent=2), status=200, mimetype='application/json')
+####################### FONCTION FIREBASE #########################
+
+def get_data(collection, document):
+    global firebase_init, firebase_app
+    if not firebase_init:
+        firebaseConfig = credentials.Certificate({
+            'type': 'service_account',
+            'project_id': os.getenv('FIREBASE_PROJECT_ID'),
+            'private_key_id': os.getenv('FIREBASE_PRIVATE_KEY_ID'),
+            'private_key': os.getenv('FIREBASE_PRIVATE_KEY'),
+            'client_email': os.getenv('FIREBASE_CLIENT_EMAIL'),
+            'client_id': os.getenv('FIREBASE_CLIENT_ID'),
+            'auth_uri': os.getenv('FIREBASE_AUTH_URI'),
+            'token_uri': os.getenv('FIREBASE_TOKEN_URI')
+        })
+        firebase_app = initialize_app(firebaseConfig)
+        firebase_init = True
+    return firestore.client().collection(collection).document(document).get().to_dict()
 
 ####################### FONCTIONS DES ENDPOINTS #########################
 
