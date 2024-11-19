@@ -18,7 +18,7 @@ Vous pouvez l'utiliser **sans limitations**, car tous les **endpoints** sont pub
 - Avec une documentation : **[docs.sylvain.pro](https://docs.sylvain.pro)**
 
 ## Récupérer une donnée
-Exemple sur **api.sylvain.pro/<version>/token**, qui récupère la clé renvoyée.
+Exemple sur **api.sylvain.pro/\<version>/token**, qui récupère la clé renvoyée.
 ### Python
 ```py
 import requests
