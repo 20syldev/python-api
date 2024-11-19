@@ -3,20 +3,19 @@
 
   # API Python - Sylvain
   [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v1.5.0-ee6464?logo=api.sylvain.pro&labelColor=23272A)](https://github.com/20syldev/python-api/releases/latest)
-  [![Statut](https://img.shields.io/badge/Statut%20:-Archivé-e39f1b?labelColor=23272A)](https://api.sylvain.pro)
+  [![Statut](https://img.shields.io/badge/Statut%20:-Archivé-e39f1b?labelColor=23272A)](https://github.com/20syldev/python-api#readme)
 </div>
 
 ---
 
 ## À propos de l'API
-Voici mon API personnelle, disponible sur le domaine [api.sylvain.pro](https://api.sylvain.pro), en français et en anglais. 
+Voici mon API en Python, auparavant disponible sur le domaine **[api.sylvain.pro](https://api.sylvain.pro)**, mainteant remplacée par une [API Node.js](https://github.com/20syldev/api).
 Vous pouvez l'utiliser **sans limitations**, car tous les **endpoints** sont publics !
 
 ## Les caractéristiques
 - Hébergé **24h/7j**
-- Utilisation simple
-- Disponible en anglais
-- Documentation : **[docs.sylvain.pro](https://docs.sylvain.pro)**
+- Utilisation simple et rapide
+- Avec une documentation : **[docs.sylvain.pro](https://docs.sylvain.pro)**
 
 ## Récupérer une donnée
 Exemple sur **api.sylvain.pro/<version>/token**, qui récupère la clé renvoyée.
