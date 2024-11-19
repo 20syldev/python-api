@@ -178,7 +178,7 @@ def captcha(lang):
             return app.response_class(response=json.dumps({ 'erreur': 'Veuillez fournir un argument valide (?text={Texte})' }, indent=2), status=200, mimetype='application/json')
 
     size = 60
-    font = ImageFont.truetype("src/font.otf", size)
+    font = ImageFont.truetype("src/Captcha-Font.otf", size)
     witdh = len(captcha) * size
     image = Image.new('RGB', (witdh, 100), color=(255, 255, 255))
     
